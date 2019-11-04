@@ -1,0 +1,20 @@
+INSERT INTO bookingHotel.Users_role(role_name)
+VALUES ('ADMIN'),
+       ('ANONYMOUS USER'),
+       ('LOGGED USER');
+INSERT INTO `bookingHotel`.`Users_rights` (`rights_title`)
+VALUES ('LOGGED'),
+       ('CREATE FORM'),
+       ('EDIT USERS');
+INSERT INTO `bookingHotel`.`Rooms` (`room_numb`, `room_type`, `from_date`, `to_date`, `is_reserved`, `places`, `price`)
+VALUES (1, 5, '2019-11-04 09:39:00', '2019-11-10 09:39:07', 1, 2, 1000);
+INSERT INTO `bookingHotel`.`Rooms` (`room_numb`, `room_type`, `from_date`, `to_date`, `is_reserved`, `places`, `price`)
+VALUES (2, 4, '2019-11-08 09:39:55', '2019-11-10 09:40:01', 1, 2, 800);
+INSERT INTO `bookingHotel`.`Rooms` (`room_numb`, `room_type`, `from_date`, `to_date`, `is_reserved`, `places`, `price`)
+VALUES (3, 3, '2019-11-05 09:41:04', '2019-11-06 09:41:14', 1, 2, 600);
+INSERT INTO `bookingHotel`.`Users` (`users_id`, `name`, `surname`, `email`, `password`, `phone`, `users_role`,
+                                    `users_rights`)
+VALUES (1, 'Denys', 'Shelupets', 'shelupets1992@gmail.com', '13e2efwef323rdfewfrs', '380502087569', 1, 3);
+INSERT INTO `bookingHotel`.`Users` (`users_id`, `name`, `surname`, `email`, `password`, `phone`, `users_role`,
+                                    `users_rights`)
+VALUES (2, 'Mary', 'Davis', 'davisM@gmail.com', 'weqw1212ewefg43g6ukv', '380667676852', 3, 2);
