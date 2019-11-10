@@ -1,4 +1,4 @@
-package org.courses.entity;
+package org.courses.model;
 
 public class User {
     private int users_id;

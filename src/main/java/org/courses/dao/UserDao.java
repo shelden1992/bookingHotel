@@ -1,9 +1,11 @@
 package org.courses.dao;
 
 import org.apache.log4j.Logger;
-import org.courses.entity.User;
-import org.courses.entity.UserRole;
+import org.courses.model.User;
+import org.courses.model.UserRole;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,10 +22,10 @@ public class UserDao extends AbstractDao<User> {
     private static final String PHONE = "phone";
     private static final String USER_ROLE = "user_role";
     private static final String SELECT_FROM = "SELECT * FROM " + USER;
-    private static final String CREATE_USER = "INSERT INTO " + USER + "(" + NAME + ", " + SURNAME + ", " + EMAIL + ", " + PASSWORD + ", " + PHONE + ", " + USER_ROLE + ")" +
+    private static final String INSERT_INTO = "INSERT INTO " + USER + "(" + NAME + ", " + SURNAME + ", " + EMAIL + ", " + PASSWORD + ", " + PHONE + ", " + USER_ROLE + ")" +
             "VALUES ( ?, ?, ?, ?, ?,?);";
 
-    private static final String DELETE_USER = "DELETE FROM " + USER + " WHERE " + USER_ID + "=?;";
+    private static final String DELETE_USER = "DELETE FROM " + USER + " WHERE " + USER_ID + "= ?;";
     private static final String UPDATE_USER_BY_ID = "UPDATE " + USER + " SET "
             + NAME + "= ?, "
             + SURNAME + "= ?, "
@@ -32,19 +34,30 @@ public class UserDao extends AbstractDao<User> {
             + PHONE + "= ?, "
             + USER_ROLE + "= ? " +
             "WHERE " + USER_ID + " = ?;";
+    private static final String GET_BY_ID = "SELECT * FROM " + USER + " WHERE " + USER_ID + " =?;";
 
     @Override
     public List<User> getAll() {
-        LOG.info("Trying get all user ");
-        return getAll(SELECT_FROM, resultSet -> new User(resultSet.getInt(USER_ID), resultSet.getString(NAME),
-                resultSet.getString(SURNAME), resultSet.getString(EMAIL), resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet.getInt(USER_ROLE))));
+        LOG.info("Trying SELECT all user ");
+        return getAll(SELECT_FROM, this::getUser);
     }
 
     @Override
-    public boolean create(User entity) {
-        LOG.info("Trying insert user " + entity);
+    public User getById(int id) {
+        return getEntityWithCondition(GET_BY_ID, ps -> ps.setInt(1, id), this::getUser);
+    }
 
-        return createUpdate(CREATE_USER, ps -> {
+    private User getUser(ResultSet resultSet) throws SQLException {
+        return new User(resultSet.getInt(USER_ID), resultSet.getString(NAME), resultSet.getString(SURNAME), resultSet.getString(EMAIL),
+                resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet));
+    }
+
+
+    @Override
+    public boolean create(User entity) {
+        LOG.info("Trying INSERT INTRO user " + entity);
+
+        return createUpdate(INSERT_INTO, ps -> {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getSurname());
             ps.setString(3, entity.getEmail());
@@ -57,8 +70,7 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     public boolean update(User entity) {
-
-        LOG.debug("Trying update entity = " + entity.getName() + " idEntity = " + entity.getUsers_id());
+        LOG.debug("Trying UPDATE user = " + entity.getName() + " idEntity = " + entity.getUsers_id());
         return createUpdate(UPDATE_USER_BY_ID, ps -> {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getSurname());
@@ -71,11 +83,15 @@ public class UserDao extends AbstractDao<User> {
     }
 
     @Override
-    public boolean remove(User entity) {
-        LOG.info("Trying remove user " + entity);
+    public boolean remove(int id) {
+        LOG.info("Trying DELETE user WHERE id =" + id);
         return createUpdate(DELETE_USER, ps -> {
-            ps.setInt(1, entity.getUsers_id());
+            ps.setInt(1, id);
         });
+    }
+
+    private UserRole getUserRole(ResultSet resultSet) throws SQLException {
+        return getUserRole(resultSet.getInt(USER_ROLE));
     }
 
     private UserRole getUserRole(int inTable) {

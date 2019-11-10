@@ -17,13 +17,13 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
 
     protected List<T> getAll(String query, EntityMapper<T> entityMapper) {
         List<T> entityList = new ArrayList<>();
-        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query);) {
+        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 entityList.add(entityMapper.map(resultSet));
             }
         } catch (SQLException e) {
-            LOG.error("Exception while getting all entity", e);
+            LOG.error("Exception while getting all model", e);
         }
         return entityList;
     }
@@ -35,9 +35,43 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
             i = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            LOG.error("Exception while create entity", e);
+            LOG.error("Exception while create model", e);
         }
         return i != 0;
     }
+
+    protected T getEntityWithCondition(String query, StatementMapper<T> statementMapper, EntityMapper<T> mapper) {
+        T getEntity = null;
+        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
+            statementMapper.map(preparedStatement);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    getEntity = mapper.map(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception while create entity");
+            e.printStackTrace();
+        }
+        return getEntity;
+    }
+
+    protected List<T> getListEntityWithCondition(String query, StatementMapper<T> statementMapper, EntityMapper<T> mapper) {
+        List<T> listEntity = new ArrayList<>();
+        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
+            statementMapper.map(preparedStatement);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    listEntity.add(mapper.map(resultSet));
+                    System.out.println();
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception while create entity");
+            e.printStackTrace();
+        }
+        return listEntity;
+    }
+
 
 }

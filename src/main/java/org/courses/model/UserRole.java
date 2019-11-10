@@ -1,4 +1,4 @@
-package org.courses.entity;
+package org.courses.model;
 
 public enum UserRole {
     ADMIN(1), USER(2);
