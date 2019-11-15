@@ -21,9 +21,11 @@ public class UserDao extends AbstractDao<User> {
     private static final String PASSWORD = "password";
     private static final String PHONE = "phone";
     private static final String USER_ROLE = "user_role";
+    private static final String ADDITIONAL_INFO = "additional_info";
     private static final String SELECT_FROM = "SELECT * FROM " + USER;
-    private static final String INSERT_INTO = "INSERT INTO " + USER + "(" + NAME + ", " + SURNAME + ", " + EMAIL + ", " + PASSWORD + ", " + PHONE + ", " + USER_ROLE + ")" +
-            "VALUES ( ?, ?, ?, ?, ?,?);";
+    private static final String INSERT_INTO = "INSERT INTO " + USER + "(" + NAME + ", " + SURNAME + ", " + EMAIL + ", "
+            + PASSWORD + ", " + PHONE + ", " + USER_ROLE + ", " + ADDITIONAL_INFO + ")" +
+            "VALUES ( ?, ?, ?, ?, ?,?,?);";
 
     private static final String DELETE_USER = "DELETE FROM " + USER + " WHERE " + USER_ID + "= ?;";
     private static final String UPDATE_USER_BY_ID = "UPDATE " + USER + " SET "
@@ -32,7 +34,8 @@ public class UserDao extends AbstractDao<User> {
             + EMAIL + "= ?, "
             + PASSWORD + "= ?, "
             + PHONE + "= ?, "
-            + USER_ROLE + "= ? " +
+            + USER_ROLE + "= ?, "
+            + ADDITIONAL_INFO + "= ? " +
             "WHERE " + USER_ID + " = ?;";
     private static final String GET_BY_ID = "SELECT * FROM " + USER + " WHERE " + USER_ID + " =?;";
 
@@ -49,7 +52,7 @@ public class UserDao extends AbstractDao<User> {
 
     private User getUser(ResultSet resultSet) throws SQLException {
         return new User(resultSet.getInt(USER_ID), resultSet.getString(NAME), resultSet.getString(SURNAME), resultSet.getString(EMAIL),
-                resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet));
+                resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet), resultSet.getString(ADDITIONAL_INFO));
     }
 
 
@@ -64,13 +67,14 @@ public class UserDao extends AbstractDao<User> {
             ps.setString(4, entity.getPassword());
             ps.setString(5, entity.getPhone());
             ps.setInt(6, entity.getUserRole().getUserRoleId());
+            ps.setString(7, entity.getAdditionalInfo());
         });
 
     }
 
     @Override
     public boolean update(User entity) {
-        LOG.debug("Trying UPDATE user = " + entity.getName() + " idEntity = " + entity.getUsers_id());
+        LOG.debug("Trying UPDATE user = " + entity.getName() + " idEntity = " + entity.getUserId());
         return createUpdate(UPDATE_USER_BY_ID, ps -> {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getSurname());
@@ -78,7 +82,8 @@ public class UserDao extends AbstractDao<User> {
             ps.setString(4, entity.getPassword());
             ps.setString(5, entity.getPhone());
             ps.setInt(6, entity.getUserRole().getUserRoleId());
-            ps.setInt(7, entity.getUsers_id());
+            ps.setString(7, entity.getAdditionalInfo());
+            ps.setInt(8, entity.getUserId());
         });
     }
 

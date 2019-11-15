@@ -65,7 +65,7 @@ public class ReservationDao extends AbstractDao<Reservation> {
     public boolean create(Reservation entity) {
         LOG.info("Trying INSERT INTO reservation " + entity);
         return createUpdate(INSERT_INTO, ps -> {
-            ps.setInt(1, entity.getRoom().getRoom_numb());
+            ps.setInt(1, entity.getRoom().getRoomNumb());
             ps.setDate(2, entity.getStartReservation());
             ps.setDate(3, entity.getFinishReservation());
         });
@@ -75,7 +75,7 @@ public class ReservationDao extends AbstractDao<Reservation> {
     public boolean update(Reservation entity) {
         LOG.debug("Trying UPDATE reservation  WHERE reservationId = " + entity.getReservationId());
         return createUpdate(UPADATE_BY_ID, ps -> {
-            ps.setInt(1, entity.getRoom().getRoom_numb());
+            ps.setInt(1, entity.getRoom().getRoomNumb());
             ps.setDate(2, entity.getStartReservation());
             ps.setDate(3, entity.getFinishReservation());
             ps.setInt(4, entity.getReservationId());

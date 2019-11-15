@@ -3,18 +3,18 @@ package org.courses.model;
 import java.util.StringJoiner;
 
 public class Room {
-    private int room_numb;
+    private int roomNumb;
     private boolean reserved;
     private int place;
     private double price;
-    private double userAssessment;
+    private RoomType roomType;
 
-    public Room(int room_numb, boolean reserved, int place, double price, double userAssessment) {
-        this.room_numb = room_numb;
+    public Room(int roomNumb, boolean reserved, int place, double price, RoomType roomType) {
+        this.roomNumb = roomNumb;
         this.reserved = reserved;
         this.place = place;
         this.price = price;
-        this.userAssessment = userAssessment;
+        this.roomType = roomType;
     }
 
     public double getPrice() {
@@ -28,19 +28,28 @@ public class Room {
     @Override
     public String toString() {
         return new StringJoiner(", ", Room.class.getSimpleName() + "[", "]")
-                .add("room_numb=" + room_numb)
+                .add("roomNumb=" + roomNumb)
                 .add("reserved=" + reserved)
                 .add("place=" + place)
-                .add("userAssessment=" + userAssessment)
+                .add("price=" + price)
+                .add("roomType=" + roomType)
                 .toString();
     }
 
-    public int getRoom_numb() {
-        return room_numb;
+    public RoomType getRoomType() {
+        return roomType;
     }
 
-    public void setRoom_numb(int room_numb) {
-        this.room_numb = room_numb;
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public int getRoomNumb() {
+        return roomNumb;
+    }
+
+    public void setRoomNumb(int roomNumb) {
+        this.roomNumb = roomNumb;
     }
 
     public boolean isReserved() {
@@ -59,11 +68,4 @@ public class Room {
         this.place = places;
     }
 
-    public double getUserAssessment() {
-        return userAssessment;
-    }
-
-    public void setUserAssessment(double userAssessment) {
-        this.userAssessment = userAssessment;
-    }
 }

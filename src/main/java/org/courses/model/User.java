@@ -1,30 +1,56 @@
 package org.courses.model;
 
+import java.util.StringJoiner;
+
 public class User {
-    private int users_id;
+    private int userId;
     private String name;
     private String surname;
     private String email;
     private String password;
     private String phone;
     private UserRole userRole;
+    private String additionalInfo;
 
-    public User(int users_id, String name, String surname, String email, String password, String phone, UserRole userRole) {
-        this.users_id = users_id;
+    public User(int userId, String name, String surname, String email, String password, String phone, UserRole userRole, String additionalInfo) {
+        this.userId = userId;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.userRole = userRole;
+        this.additionalInfo = additionalInfo;
     }
 
-    public int getUsers_id() {
-        return users_id;
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("userId=" + userId)
+                .add("name='" + name + "'")
+                .add("surname='" + surname + "'")
+                .add("email='" + email + "'")
+                .add("password='" + password + "'")
+                .add("phone='" + phone + "'")
+                .add("userRole=" + userRole)
+                .add("additionalInfo='" + additionalInfo + "'")
+                .toString();
     }
 
-    public void setUsers_id(int users_id) {
-        this.users_id = users_id;
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {

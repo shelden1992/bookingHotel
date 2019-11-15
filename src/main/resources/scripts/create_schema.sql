@@ -25,7 +25,7 @@ create table user
 );
 create table room
 (
-    room_numb   int               not null,
+    roomNumb   int               not null,
     room_type   int     default 5 not null,
     from_date   datetime          not null,
     to_date     datetime          not null,
@@ -33,7 +33,7 @@ create table room
     places      int     default 2 not null,
     price       double            not null,
     constraint rooms_pk
-        primary key (room_numb)
+        primary key (roomNumb)
 );
 create table form
 (
@@ -44,7 +44,7 @@ create table form
     to_date   datetime not null,
 
     constraint form_rooms_room_numb_fk
-        foreign key (room) references room (room_numb),
+        foreign key (room) references room (roomNumb),
     constraint form_user_user_id_fk
         foreign key (user) references user (user_id),
     constraint form_pk primary key (form_id)
