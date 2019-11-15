@@ -30,7 +30,6 @@ public class DispatcherServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = getRelativePath(req);
-
         Command command = CommandFactory.getCommand(path, req.getMethod());
         Page page = command.perform(req);
         if (page.isRedirect()) {

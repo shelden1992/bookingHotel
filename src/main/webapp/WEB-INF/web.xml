@@ -4,16 +4,28 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-<!--    <servlet>-->
-<!--    <servlet-name>mdht-restlet</servlet-name>-->
-<!--    <servlet-class>org.courses.web.UserServlet</servlet-class>-->
-<!--    </servlet>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ui/404.html</location>
+    </error-page>
+
+<!--    <filter>-->
+<!--        <filter-name>contextPathFilter</filter-name>-->
+<!--        <filter-class>org.courses.web.filter.StaticResourceFilterter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>contextPathFilter</filter-name>-->
+<!--        <url-pattern>/</url-pattern>-->
+<!--    </filter-mapping>-->
+    <!--        <servlet>-->
+    <!--        <servlet-name></servlet-name>-->
+    <!--        <servlet-class>org.courses.web.UserServlet</servlet-class>-->
+    <!--        </servlet>-->
 
 
-
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>mdht-restlet</servlet-name>-->
-<!--        <url-pattern>/*</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <!--        <servlet-mapping>-->
+    <!--            <servlet-name>mdht-restlet</servlet-name>-->
+    <!--            <url-pattern>/booking-hotel</url-pattern>-->
+    <!--        </servlet-mapping>-->
 
 </web-app>

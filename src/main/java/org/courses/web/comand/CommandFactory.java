@@ -18,9 +18,12 @@ public class CommandFactory {
         getCommandMap.put("/404", defaultCommand);
         getCommandMap.put("/user", new UserCommand());
         getCommandMap.put("/", new HomeCommand());
+        getCommandMap.put("/selection-rooms", new RoomsCommand());
+//        getCommandMap.put("/login", new LoginCommand());
 
 
         postCommandMap.put("/", new HomeCommand());
+        postCommandMap.put("/login", new LoginCommand());
     }
 
     public static Command getCommand(String path, String method) {

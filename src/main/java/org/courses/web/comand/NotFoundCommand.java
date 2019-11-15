@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class NotFoundCommand implements Command {
 
-    private static final String NOT_FOUND_PAGE = "/pages/404.html";
+    private static final String NOT_FOUND_PAGE = "/ui/404.html";
 
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {

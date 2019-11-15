@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class HomeCommand implements Command {
-    private static final String HOME_URL = "/homePage.jsp";
+    private static final String HOME_URL = "/ui/index.jsp";
 
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
 
-        return new Page(HOME_URL, true);
+        return new Page(HOME_URL );
     }
 }
