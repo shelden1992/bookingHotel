@@ -11,19 +11,19 @@ import java.util.List;
 
 public class RoomDao extends AbstractDao<Room> {
     private static final Logger LOG = Logger.getLogger(RoomDao.class);
-    private static final RoomType[] ROOM_TYPES = {RoomType.BUSINESS, RoomType.COMFORT, RoomType.DOUBLE_LUX, RoomType.LUX, RoomType.RELAX};
+    private static final RoomType[] ROOM_TYPES = {RoomType.BUSINESS, RoomType.COMFORT, RoomType.FAMILY_REST, RoomType.LUX, RoomType.RELAX};
     private static final String ROOM = "room";
     private static final String ROOM_NUMB = "room_numb";
     private static final String IS_RESERVED = "is_reserved";
     private static final String PLACE = "place";
     private static final String PRICE = "price";
-    private static final String TYPE_ID = "type_id";
+    private static final String TYPE = "type";
     private static final String SELECT_FROM = "SELECT * FROM " + ROOM + ";";
     private static final String INSERT_INTO = "INSERT INTO " + ROOM + "("
             + IS_RESERVED + ", "
             + PLACE + ", "
             + PRICE + ", "
-            + TYPE_ID
+            + TYPE
             + ") VALUES(?,?,?,?);";
     private static final String SELECT_BY_ID = "SELECT * FROM " + ROOM + " WHERE "
             + ROOM_NUMB + " = ?;";
@@ -35,7 +35,7 @@ public class RoomDao extends AbstractDao<Room> {
             + IS_RESERVED + "= ?, "
             + PLACE + "= ?, "
             + PRICE + "= ?, "
-            + TYPE_ID + "= ?, "
+            + TYPE + "= ?, "
             + "WHERE " + ROOM_NUMB + " = ?;";
 
 
@@ -58,7 +58,7 @@ public class RoomDao extends AbstractDao<Room> {
 
     private Room getRoom(ResultSet resultSet) throws SQLException {
         return new Room(resultSet.getInt(ROOM_NUMB), resultSet.getBoolean(IS_RESERVED),
-                resultSet.getInt(PLACE), resultSet.getDouble(PRICE), getRoomType(resultSet.getInt(TYPE_ID)));
+                resultSet.getInt(PLACE), resultSet.getDouble(PRICE), getRoomType(resultSet.getString(TYPE)));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class RoomDao extends AbstractDao<Room> {
             ps.setBoolean(1, entity.isReserved());
             ps.setInt(2, entity.getPlace());
             ps.setDouble(3, entity.getPrice());
-            ps.setInt(4, entity.getRoomType().getId());
+            ps.setString(4, entity.getRoomType().getName());
         });
     }
 
@@ -79,7 +79,7 @@ public class RoomDao extends AbstractDao<Room> {
             ps.setBoolean(1, entity.isReserved());
             ps.setInt(2, entity.getPlace());
             ps.setDouble(3, entity.getPrice());
-            ps.setInt(4, entity.getRoomType().getId());
+            ps.setString(4, entity.getRoomType().getName());
             ps.setInt(5, entity.getRoomNumb());
 
         });
@@ -91,8 +91,8 @@ public class RoomDao extends AbstractDao<Room> {
         return createUpdate(DELETE, ps -> ps.setInt(1, id));
     }
 
-    private RoomType getRoomType(int inTable) {
-        return Arrays.stream(ROOM_TYPES).filter(type -> type.getId() == inTable).findAny().orElse(null);
+    private RoomType getRoomType(String inTable) {
+        return Arrays.stream(ROOM_TYPES).filter(type -> type.getName().equals(inTable)).findAny().orElse(null);
     }
 
 }

@@ -1,15 +1,15 @@
 package org.courses.model;
 
 public enum RoomType {
-    LUX(2), BUSINESS(3), RELAX(4), DOUBLE_LUX(5), COMFORT(1);
-    private int id;
+    LUX("LUX"), BUSINESS("BUSINESS"), RELAX("RELAX"), FAMILY_REST("FAMILY REST"), COMFORT("COMFORT");
 
-    RoomType(int id) {
-        this.id = id;
+    private String name;
 
+    RoomType(String name) {
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 }

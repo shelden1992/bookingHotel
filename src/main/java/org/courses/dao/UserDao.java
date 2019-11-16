@@ -66,7 +66,7 @@ public class UserDao extends AbstractDao<User> {
             ps.setString(3, entity.getEmail());
             ps.setString(4, entity.getPassword());
             ps.setString(5, entity.getPhone());
-            ps.setInt(6, entity.getUserRole().getUserRoleId());
+            ps.setString(6, entity.getUserRole().getUserRoleName());
             ps.setString(7, entity.getAdditionalInfo());
         });
 
@@ -81,7 +81,7 @@ public class UserDao extends AbstractDao<User> {
             ps.setString(3, entity.getEmail());
             ps.setString(4, entity.getPassword());
             ps.setString(5, entity.getPhone());
-            ps.setInt(6, entity.getUserRole().getUserRoleId());
+            ps.setString(6, entity.getUserRole().getUserRoleName());
             ps.setString(7, entity.getAdditionalInfo());
             ps.setInt(8, entity.getUserId());
         });
@@ -96,11 +96,11 @@ public class UserDao extends AbstractDao<User> {
     }
 
     private UserRole getUserRole(ResultSet resultSet) throws SQLException {
-        return getUserRole(resultSet.getInt(USER_ROLE));
+        return getUserRole(resultSet.getString(USER_ROLE));
     }
 
-    private UserRole getUserRole(int inTable) {
-        return Arrays.stream(USER_ROLES).filter(role -> role.getUserRoleId() == inTable).findAny().orElse(null);
+    private UserRole getUserRole(String inTable) {
+        return Arrays.stream(USER_ROLES).filter(role -> role.getUserRoleName().equals(inTable)).findAny().orElse(null);
     }
 
 }

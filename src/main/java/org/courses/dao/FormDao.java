@@ -15,15 +15,18 @@ public class FormDao extends AbstractDao<Form> {
     private static final String FORM_ID = "form_id";
     private static final String USER_ID = "user_id";
     private static final String RESERVATION_ID = "reservation_id";
+    private static final String ADDITIONAL_INFO = "additional_info";
     private static final String SELECT_FROM = "SELECT * FROM " + FORM + ";";
     private static final String SELECT_FROM_BY_ID = "SELECT * FROM " + FORM + "WHERE " + USER_ID + " =?;";
     private static final String DELETE = "DELETE FROM " + FORM + "WHERE " + USER_ID + " =?;";
     private static final String INSERT_INTO = "INSERT INTO" + FORM + "("
             + USER_ID + ", "
-            + RESERVATION_ID + ") VALUES(?, ?);";
+            + RESERVATION_ID + ", "
+            + ADDITIONAL_INFO + ") VALUES(?, ?, ?);";
     private static final String UPDATE_FORM_BY_ID = "UPDATE " + FORM + " SET "
             + USER_ID + "= ?, "
             + RESERVATION_ID + "= ?, "
+            + ADDITIONAL_INFO + "= ? "
             + "WHERE " + FORM_ID + " = ?;";
 
 
@@ -34,7 +37,7 @@ public class FormDao extends AbstractDao<Form> {
     }
 
     private Form getForm(ResultSet resultSet) throws SQLException {
-        return new Form(resultSet.getInt(FORM_ID), getUserById(resultSet), getReservationById(resultSet));
+        return new Form(resultSet.getInt(FORM_ID), getUserById(resultSet), getReservationById(resultSet), resultSet.getString(ADDITIONAL_INFO));
     }
 
     private Reservation getReservationById(ResultSet resultSet) throws SQLException {
@@ -57,6 +60,7 @@ public class FormDao extends AbstractDao<Form> {
         return createUpdate(INSERT_INTO, ps -> {
             ps.setInt(1, entity.getUser().getUserId());
             ps.setInt(2, entity.getReservation().getReservationId());
+            ps.setString(3, entity.getAdditionalInfo());
         });
     }
 
@@ -66,7 +70,8 @@ public class FormDao extends AbstractDao<Form> {
         return createUpdate(UPDATE_FORM_BY_ID, ps -> {
             ps.setInt(1, entity.getUser().getUserId());
             ps.setInt(2, entity.getReservation().getReservationId());
-            ps.setInt(3, entity.getFormId());
+            ps.setString(3, entity.getAdditionalInfo());
+            ps.setInt(4, entity.getFormId());
         });
     }
 
