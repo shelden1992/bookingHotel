@@ -7,12 +7,14 @@
 *.tar.gz
 *.rar
 
+*.log
+
 # Compiled class file
 *.class
 
 .idea
 *.iml
-.log
+
 
 .classpath
 .project
