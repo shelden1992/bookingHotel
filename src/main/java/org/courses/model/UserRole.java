@@ -1,15 +1,15 @@
 package org.courses.model;
 
 public enum UserRole {
-    ADMIN(1), USER(2);
+    ADMIN("ADMIN"), USER("USER");
 
-    private int userRoleId;
+    private String userRoleName;
 
-    UserRole(int userRoleId) {
-        this.userRoleId = userRoleId;
+    UserRole(String userRole) {
+        this.userRoleName = userRole;
     }
 
-    public int getUserRoleId() {
-        return userRoleId;
+    public String getUserRoleName() {
+        return userRoleName;
     }
 }

@@ -4,11 +4,21 @@ public class Form {
     private int formId;
     private User user;
     private Reservation reservation;
+    private String additionalInfo;
 
-    public Form(int formId, User user, Reservation reservation) {
+    public Form(int formId, User user, Reservation reservation, String additionalInfo) {
         this.formId = formId;
         this.user = user;
         this.reservation = reservation;
+        this.additionalInfo = additionalInfo;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public int getFormId() {
