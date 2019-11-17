@@ -7,11 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class RoomsCommand implements Command {
-
-
+public class EventCommand implements Command {
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
-        return new Page(PagePathConstant.SECTION_ROOMS_JSP);
+        return new Page(PagePathConstant.EVENT);
     }
 }

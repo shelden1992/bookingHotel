@@ -7,11 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class RoomsCommand implements Command {
-
+public class PrivacyPolicyCommand implements Command {
 
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
-        return new Page(PagePathConstant.SECTION_ROOMS_JSP);
+        return new Page(PagePathConstant.PRIVACY_POLICY);
     }
 }
