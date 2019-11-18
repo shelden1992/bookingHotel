@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
+
 <html>
 <head>
     <base href="${pageContext.request.contextPath}/ui/pages/">
@@ -33,7 +38,7 @@
     <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
             <div class="col-md-10 text-center" data-aos="fade-up">
-                <h1 class="heading"> Privacy Statement</h1>
+                <h1 class="heading">  <fmt:message key="privacy.header"/></h1>
             </div>
         </div>
     </div>
@@ -45,54 +50,34 @@
     </a>
 </section>
 
-<div class="row pt-5 col-md-4 text-center" style="margin: auto;">
+<div class="row pt-5 col-md-6 text-center" style="margin: auto;">
 
     <div>
         <p align="justify">
-            First things first – your privacy is important to us. We know that’s the kind of thing all these sorts of
-            notices say, but frankly we mean it. You’ve placed your trust in us by using the booking-hotel.com services and we
-            value that trust. That means we’re committed to protecting and safeguarding any personal data you give us.
-            We act in our customers’ interest and we are transparent about the processing of your personal data.
+          <fmt:message key="privacy.first"/>
         </p>
 
         <p align="justify">
-            This document describes how we use and process your personal data, hopefully provided in a readable and
-            transparent manner so you can get where we’re coming from without getting bored senseless. As an added
-            bonus, it also tells you how to contact us if you have questions about your personal data, which we’re more
-            than happy to answer.
-            Please also read our separate Cookie Statement, which tells you how booking-hotel.com makes use of cookies and
-            other similar technologies. For a better understanding of what we mean by “Trip”, “Trip Provider”, “Trip
-            Service” and “Trip Reservation”, please read the booking-hotel.com Terms and Conditions.
+            <fmt:message key="privacy.second"/>
         </p>
 
         <p align="justify">
-            If you’ve ever used us before, you’ll know that booking-hotel.com offers online travel-related services through
-            our own websites and mobile apps, as well as through other online platforms such as partners’ websites and
-            social media.
-            Why point that out, you ask? Well, here’s the thing. All the information that follows applies to not one,
-            not two, but all of these platforms. Several platforms, one privacy statement.
+            <fmt:message key="privacy.third"/>
         </p>
 
         <p align="justify">
-            This one privacy statement applies to any kind of information we collect through these platforms or other
-            means connected to these platforms (such as contacting our customer service team via email). It makes for a
-            lot less tedious reading. If you are one of our business partners, make sure to also check out our Privacy
-            Statement for Business Partners to understand how personal data is further processed as part of the business
-            relationship.
+            <fmt:message key="privacy.four"/>
+
         </p>
 
         <p align="justify">
-            We might amend the Privacy Statement from time to time. If you care about your privacy, visit this page
-            regularly and you’ll know exactly where you stand. If we make changes to the Privacy Statement which will
-            have an impact on you (for example, if we intend to process your personal data for other purposes than
-            communicated in the past in this Privacy Statement), we will notify you of these changes before the new
-            activities begin.
+            <fmt:message key="privacy.five"/>
+
         </p>
 
         <p align="justify">
-            Sad but necessary bit: If you disagree with this Privacy Statement, you should discontinue using our
-            services. If you agree with our Privacy Statement, then you’re all set to book your next Trip through us.
-            Let the good times roll!
+            <fmt:message key="privacy.six"/>
+
         </p>
     </div>
 </div>

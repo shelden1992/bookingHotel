@@ -33,8 +33,8 @@ public class DispatcherServlet extends HttpServlet {
         Command command = CommandFactory.getCommand(path, req.getMethod());
         Page page = command.perform(req);
         if (page.isRedirect()) {
-            LOG.info("Page is redirect to " + page.getUrl());
-            resp.sendRedirect(page.getUrl());
+            LOG.info("Page is redirect to " + req.getContextPath() + page.getUrl());
+            resp.sendRedirect(req.getContextPath() + page.getUrl());
         } else {
             LOG.info("Page is forward to " + page.getUrl());
             req.getRequestDispatcher(page.getUrl()).forward(req, resp);

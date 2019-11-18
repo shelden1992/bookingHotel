@@ -7,4 +7,5 @@ public class PagePathConstant {
     public static final String PRIVACY_POLICY = "/ui/pages/privacy.jsp";
     public static final String EVENT = "/ui/pages/event.jsp";
     public static final String TEAM = "/ui/pages/team.jsp";
+    public static final String GALLERY = "/ui/pages/gallery.jsp";
 }

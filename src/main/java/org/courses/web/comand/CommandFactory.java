@@ -22,6 +22,8 @@ public class CommandFactory {
         getCommandMap.put("/privacy", new PrivacyPolicyCommand());
         getCommandMap.put("/event", new EventCommand());
         getCommandMap.put("/team", new TeamCommand());
+        getCommandMap.put("/language", new LanguageCommand());
+        getCommandMap.put("/gallery", new GalleryCommand());
 //        getCommandMap.put("/login", new LoginCommand());
 
 

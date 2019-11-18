@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -34,7 +38,7 @@
     <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
             <div class="col-md-10 text-center" data-aos="fade-up">
-                <h1 class="heading">Stay With Us &amp; Relax</h1>
+                <h1 class="heading"><fmt:message key="home.banner.header"/></h1>
             </div>
         </div>
     </div>
@@ -55,14 +59,16 @@
                 <form action="#">
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkin_date" class="font-weight-bold text-black">Check In</label>
+                            <label for="checkin_date" class="font-weight-bold text-black"><fmt:message
+                                    key="navigation.bookingForm.dataCheckIn"/> </label>
                             <div class="field-icon-wrap">
                                 <div class="icon"><span class="icon-calendar"></span></div>
                                 <input type="text" id="checkin_date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkout_date" class="font-weight-bold text-black">Check Out</label>
+                            <label for="checkout_date" class="font-weight-bold text-black"><fmt:message
+                                    key="navigation.bookingForm.dataCheckOut"/> </label>
                             <div class="field-icon-wrap">
                                 <div class="icon"><span class="icon-calendar"></span></div>
                                 <input type="text" id="checkout_date" class="form-control">
@@ -71,7 +77,8 @@
                         <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
                             <div class="row">
                                 <div class="col-md-6 mb-3 mb-md-0">
-                                    <label for="adults" class="font-weight-bold text-black">Adults</label>
+                                    <label for="adults" class="font-weight-bold text-black"><fmt:message
+                                            key="navigation.bookingForm.adults"/></label>
                                     <div class="field-icon-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="" id="adults" class="form-control">
@@ -85,7 +92,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3 align-self-end">
-                            <button class="btn btn-primary btn-block text-white">Check Availabilty</button>
+                            <button class="btn btn-primary btn-block text-white"><fmt:message
+                                    key="navigation.bookingForm.checkAvailabilty"/></button>
                         </div>
                     </div>
                 </form>
@@ -100,61 +108,13 @@
 <%@include file="../ui/partOfPage/about.jsp" %>
 <!-- END .block-1 -->
 
-<!--photos-->
-<section class="section slider-section bg-light">
-    <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-            <div class="col-md-7">
-                <h2 class="heading" data-aos="fade-up">Photos</h2>
-<%--                <p data-aos="fade-up" data-aos-delay="100"> </p>--%>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
-                    <div class="slider-item">
-                        <a href="images/room1/room1_img1.jpg" data-fancybox="images" data-caption="Caption for this image"><img
-                                src="images/room1/room1_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="images/room2/room2_img4.jpg" data-fancybox="images" data-caption="Caption for this image"><img
-                                src="images/room2/room2_img4.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="images/room3/room3_img2.jpg" data-fancybox="images" data-caption="Caption for this image"><img
-                                src="images/room3/room3_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="images/room4/room4_img3.jpg" data-fancybox="images" data-caption="Caption for this image"><img
-                                src="images/room4/room4_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="images/room5/room5_img1.jpg" data-fancybox="images" data-caption="Caption for this image"><img
-                                src="images/room5/room5_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </div>
-                    <div class="slider-item">
-                        <a href="images/room6/room6_img2.jpg" data-fancybox="images" data-caption="Caption for this image"><img
-                                src="images/room6/room6_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </div>
-<%--                    <div class="slider-item">--%>
-<%--                        <a href="images/room2/room2_img1.jpg" data-fancybox="images" data-caption="Caption for this image"><img--%>
-<%--                                src="images/room2/room2_img1.jpg" alt="Image placeholder" class="img-fluid"></a>--%>
-<%--                    </div>--%>
-                </div>
-                <!-- END slider -->
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- END section-2-->
 
 <!--reviews-->
 <section class="section testimonial-section">
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-md-7">
-                <h2 class="heading" data-aos="fade-up">People Says</h2>
+                <h2 class="heading" data-aos="fade-up"><fmt:message key="home.banner.peopleSay"/></h2>
             </div>
         </div>
         <div class="row">
@@ -166,7 +126,7 @@
                     </div>
                     <blockquote>
 
-                        <p>&ldquo;I can safely recommend it. I wanted to mention the excellent staff.&rdquo;</p>
+                        <p><fmt:message key="home.banner.peopleSay1"/></p>
                     </blockquote>
                     <p><em>&mdash; Jean Smith</em></p>
                 </div>
@@ -176,7 +136,7 @@
                         <img src="images/person_2.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
-                        <p>&ldquo;Really grate place!&rdquo;</p>
+                        <p><fmt:message key="home.banner.peopleSay2"/></p>
                     </blockquote>
                     <p><em>&mdash; Dian Doe</em></p>
                 </div>
@@ -187,7 +147,7 @@
                     </div>
                     <blockquote>
 
-                        <p>&ldquo;I was relaxing with my family - everything is super.&rdquo;</p>
+                        <p><fmt:message key="home.banner.peopleSay3"/></p>
                     </blockquote>
                     <p><em>&mdash; Jonin Warshawskii</em></p>
                 </div>
@@ -199,7 +159,7 @@
                     </div>
                     <blockquote>
 
-                        <p>&ldquo;Great hotel for business.&rdquo;</p>
+                        <p><fmt:message key="home.banner.peopleSay4"/></p>
                     </blockquote>
                     <p><em>&mdash; Rosa Len</em></p>
                 </div>
@@ -209,7 +169,7 @@
                         <img src="images/person_12.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
-                        <p>&ldquo;Super, super, super. Highly recommend.&rdquo;</p>
+                        <p><fmt:message key="home.banner.peopleSay5"/></p>
                     </blockquote>
                     <p><em>&mdash; Denis Mark</em></p>
                 </div>
@@ -220,7 +180,7 @@
                     </div>
                     <blockquote>
 
-                        <p>&ldquo;I did not want to bother. Feel at home. Very nice and comfortable.&rdquo;</p>
+                        <p><fmt:message key="home.banner.peopleSay6"/></p>
                     </blockquote>
                     <p><em>&mdash; Barbar Straiz</em></p>
                 </div>
@@ -238,9 +198,8 @@
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-md-7">
-                <h2 class="heading" data-aos="fade-up">Contact Us</h2>
-                <p data-aos="fade-up">If you have any questions for which you did not find the answer, call write to us.
-                    Our support service is open 24/7.</p>
+                <h2 class="heading" data-aos="fade-up"><fmt:message key="home.banner.contactUs"/></h2>
+                <p data-aos="fade-up"><fmt:message key="home.banner.contactUsIfYouHave"/></p>
             </div>
         </div>
         <div class="row">
@@ -249,11 +208,11 @@
                 <form method="post" class="bg-white p-md-5 p-4 mb-5 border">
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="name">Name</label>
+                            <label for="name"><fmt:message key="navigation.bookingForm.name"/></label>
                             <input type="text" name="name" id="name" class="form-control ">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone"><fmt:message key="navigation.bookingForm.phone"/></label>
                             <input type="text" name="phone" id="phone" class="form-control ">
                         </div>
                     </div>
@@ -266,14 +225,14 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col-md-12 form-group">
-                            <label for="message">Write Message</label>
+                            <label for="message"><fmt:message key="home.banner.writeMessage"/></label>
                             <textarea name="message" id="message" class="form-control " cols="30"
                                       rows="8"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <input type="submit" value="Send Message"
+                            <input type="submit" value="<fmt:message key="home.banner.sendMessage"/>"
                                    class="btn btn-primary text-white font-weight-bold">
                             <div class="submitting"></div>
                         </div>
@@ -287,9 +246,11 @@
             <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="row">
                     <div class="col-md-10 ml-auto contact-info">
-                        <p><span class="d-block">Address:</span> <span class="text-black"> Khreschatyk St, 15/4 Kyiv, 01001</span>
+                        <p><span class="d-block"><fmt:message key="endPage.banner.address"/></span> <span
+                                class="text-black"> Khreschatyk St, 15/4 Kyiv, 01001</span>
                         </p>
-                        <p><span class="d-block">Phone:</span> <span class="text-black"> +38(050)208-75-69</span></p>
+                        <p><span class="d-block"><fmt:message key="endPage.banner.phone"/></span> <span
+                                class="text-black"> +38(050)208-75-69</span></p>
                         <p><span class="d-block">Email:</span> <span
                                 class="text-black"> booking_hotelShel@gmail.com</span></p>
                     </div>

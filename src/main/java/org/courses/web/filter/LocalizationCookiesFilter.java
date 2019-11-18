@@ -1,19 +1,15 @@
 package org.courses.web.filter;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
-@WebFilter(value = "/cookies",
-        initParams = {@WebInitParam(name = "locale", value = "en"), @WebInitParam(name = "bundle", value = "messages")})
 public class LocalizationCookiesFilter implements Filter {
+    private static final Logger LOG = Logger.getLogger(LocalizationCookiesFilter.class);
     private static final String LOCALE_ATTR = "locale";
     private static final String BUNDLE_ATTR = "bundle";
 
@@ -33,26 +29,36 @@ public class LocalizationCookiesFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession();
 
-        List<Cookie> cookies = Arrays.asList(httpServletRequest.getCookies());
 
-        if (hasNotCookie(cookies, LOCALE_ATTR)) {
-            httpServletResponse.addCookie(new Cookie(LOCALE_ATTR, defaultLocale));
-            //optional, but could be also saved in session for easiest 'get' in jsp
-            session.setAttribute(LOCALE_ATTR, defaultLocale);
-        }
-
-        //better save in session, since it is 'app' config and should not be shown to user
-        if (hasNotCookie(cookies, BUNDLE_ATTR)) {
-            //httpServletResponse.addCookie(new Cookie(BUNDLE_ATTR, defaultBundle));
-            session.setAttribute(BUNDLE_ATTR, defaultBundle);
-        }
-
+        setLocalToSession(session);
+        setBundleToSession(session);
         chain.doFilter(request, response);
+        return;
     }
 
-    private boolean hasNotCookie(List<Cookie> cookies, String name) {
-        return cookies.stream().noneMatch(cookie -> name.equals(cookie.getName()));
+    private void setBundleToSession(HttpSession session) {
+
+        String attribute = (String) session.getAttribute(BUNDLE_ATTR);
+        if (attribute == null) {
+            LOG.info("No BUNDLE attribute in session. Send default bundle");
+            session.setAttribute(BUNDLE_ATTR, defaultBundle);
+        } else {
+            LOG.info("BUNDLE attribute ALREADY in session. " + attribute);
+        }
+
     }
+
+    private void setLocalToSession(HttpSession session) {
+        String attribute = (String) session.getAttribute(LOCALE_ATTR);
+        if (attribute == null) {
+            LOG.info("No LOCALE attribute in session. Send default locale");
+            session.setAttribute(LOCALE_ATTR, defaultLocale);
+        } else {
+            LOG.info("LOCALE attribute ALREADY in session. " + attribute);
+        }
+
+    }
+
 
     @Override
     public void destroy() {

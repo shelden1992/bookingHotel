@@ -3,11 +3,9 @@ package org.courses.web.filter;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter(value = "/*")
 public class StaticResourceFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(StaticResourceFilter.class);
     private static final String RESOURCES_PATH = "/resources/";
