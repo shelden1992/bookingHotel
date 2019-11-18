@@ -1,13 +1,13 @@
 package org.courses.model;
 
-public class Form {
-    private int formId;
+public class Form extends Entity  {
+
     private User user;
     private Reservation reservation;
     private String additionalInfo;
 
-    public Form(int formId, User user, Reservation reservation, String additionalInfo) {
-        this.formId = formId;
+    public Form(int id, User user, Reservation reservation, String additionalInfo) {
+        this.id = id;
         this.user = user;
         this.reservation = reservation;
         this.additionalInfo = additionalInfo;
@@ -21,12 +21,12 @@ public class Form {
         this.additionalInfo = additionalInfo;
     }
 
-    public int getFormId() {
-        return formId;
+        public int getEntityId() {
+        return id;
     }
 
-    public void setFormId(int formId) {
-        this.formId = formId;
+    public void setEntityId(int id) {
+        this.id = id;
     }
 
     public User getUser() {

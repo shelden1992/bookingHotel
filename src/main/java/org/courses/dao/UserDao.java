@@ -38,6 +38,8 @@ public class UserDao extends AbstractDao<User> {
             + ADDITIONAL_INFO + "= ? " +
             "WHERE " + USER_ID + " = ?;";
     private static final String GET_BY_ID = "SELECT * FROM " + USER + " WHERE " + USER_ID + " =?;";
+    private static final String GET_BY_NAME_SUNAME_PHONE = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
+            + SURNAME + " =? AND " + PHONE + " =?;";
 
     @Override
     public List<User> getAll() {
@@ -53,6 +55,15 @@ public class UserDao extends AbstractDao<User> {
     private User getUser(ResultSet resultSet) throws SQLException {
         return new User(resultSet.getInt(USER_ID), resultSet.getString(NAME), resultSet.getString(SURNAME), resultSet.getString(EMAIL),
                 resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet), resultSet.getString(ADDITIONAL_INFO));
+    }
+
+    public User getUserByNameSurnameAndPhone(String name, String surname, String phone) {
+        return getEntityWithCondition(GET_BY_NAME_SUNAME_PHONE, ps -> {
+            ps.setString(1, name);
+            ps.setString(2, surname);
+            ps.setString(3, phone);
+
+        }, this::getUser);
     }
 
 
@@ -74,7 +85,7 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     public boolean update(User entity) {
-        LOG.debug("Trying UPDATE user = " + entity.getName() + " idEntity = " + entity.getUserId());
+        LOG.debug("Trying UPDATE user = " + entity.getName() + " idEntity = " + entity.getEntityId());
         return createUpdate(UPDATE_USER_BY_ID, ps -> {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getSurname());
@@ -83,7 +94,7 @@ public class UserDao extends AbstractDao<User> {
             ps.setString(5, entity.getPhone());
             ps.setString(6, entity.getUserRole().getUserRoleName());
             ps.setString(7, entity.getAdditionalInfo());
-            ps.setInt(8, entity.getUserId());
+            ps.setInt(8, entity.getEntityId());
         });
     }
 

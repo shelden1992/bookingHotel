@@ -2,25 +2,24 @@ package org.courses.model;
 
 import java.sql.Date;
 
-public class Reservation {
-    private int reservationId;
+public class Reservation extends Entity  {
     private Room room;
     private Date startReservation;
     private Date finishReservation;
 
-    public Reservation(int reservationId, Room room, Date startReservation, Date finishReservation) {
-        this.reservationId = reservationId;
+    public Reservation(int id, Room room, Date startReservation, Date finishReservation) {
+        this.id = id;
         this.room = room;
         this.startReservation = startReservation;
         this.finishReservation = finishReservation;
     }
 
-    public int getReservationId() {
-        return reservationId;
+    public int getEntityId() {
+        return id;
     }
 
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
+    public void setEntityId(int reservationId) {
+        this.id = reservationId;
     }
 
     public Room getRoom() {

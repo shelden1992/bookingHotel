@@ -74,13 +74,13 @@ public class RoomDao extends AbstractDao<Room> {
 
     @Override
     public boolean update(Room entity) {
-        LOG.debug("Trying UPDATE room  WHERE idEntity = " + entity.getRoomNumb());
+        LOG.debug("Trying UPDATE room  WHERE idEntity = " + entity.getEntityId());
         return createUpdate(UPDATE_USER_BY_ID, ps -> {
             ps.setBoolean(1, entity.isReserved());
             ps.setInt(2, entity.getPlace());
             ps.setDouble(3, entity.getPrice());
             ps.setString(4, entity.getRoomType().getName());
-            ps.setInt(5, entity.getRoomNumb());
+            ps.setInt(5, entity.getEntityId());
 
         });
     }

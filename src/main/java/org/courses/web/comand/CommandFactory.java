@@ -16,19 +16,19 @@ public class CommandFactory {
 
     static {
         getCommandMap.put("/404", defaultCommand);
-        getCommandMap.put("/user", new UserCommand());
         getCommandMap.put("/", new HomeCommand());
+        getCommandMap.put("/user", new UserCommand());
         getCommandMap.put("/selection-rooms", new RoomsCommand());
         getCommandMap.put("/privacy", new PrivacyPolicyCommand());
         getCommandMap.put("/event", new EventCommand());
         getCommandMap.put("/team", new TeamCommand());
         getCommandMap.put("/language", new LanguageCommand());
         getCommandMap.put("/gallery", new GalleryCommand());
-//        getCommandMap.put("/login", new LoginCommand());
 
 
         postCommandMap.put("/", new HomeCommand());
         postCommandMap.put("/login", new LoginCommand());
+        postCommandMap.put("/register", new RegisterUserCommand());
     }
 
     public static Command getCommand(String path, String method) {
@@ -48,9 +48,7 @@ public class CommandFactory {
     private static Command getCommand(String path) {
         Command command = (getCommandMap.get(path));
         LOG.info(String.format("GET command %s for path %s", command, path));
-        Command command1 = nonNull(command) ? command : defaultCommand;
-        System.out.println(command1);
-        return command1;
+        return nonNull(command) ? command : defaultCommand;
 
     }
 }

@@ -2,15 +2,14 @@ package org.courses.model;
 
 import java.util.StringJoiner;
 
-public class Room {
-    private int roomNumb;
+public class Room extends Entity {
     private boolean reserved;
     private int place;
     private double price;
     private RoomType roomType;
 
-    public Room(int roomNumb, boolean reserved, int place, double price, RoomType roomType) {
-        this.roomNumb = roomNumb;
+    public Room(int id, boolean reserved, int place, double price, RoomType roomType) {
+        this.id = id;
         this.reserved = reserved;
         this.place = place;
         this.price = price;
@@ -28,7 +27,7 @@ public class Room {
     @Override
     public String toString() {
         return new StringJoiner(", ", Room.class.getSimpleName() + "[", "]")
-                .add("roomNumb=" + roomNumb)
+                .add("id=" + id)
                 .add("reserved=" + reserved)
                 .add("place=" + place)
                 .add("price=" + price)
@@ -44,12 +43,12 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public int getRoomNumb() {
-        return roomNumb;
+    public int getEntityId() {
+        return id;
     }
 
-    public void setRoomNumb(int roomNumb) {
-        this.roomNumb = roomNumb;
+    public void setEntityId(int id) {
+        this.id = id;
     }
 
     public boolean isReserved() {

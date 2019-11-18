@@ -3,6 +3,7 @@ package org.courses.web.data;
 public class Page {
     private String url;
     private boolean redirect;
+    private String setAtribut;
 
     public Page(String url, boolean redirect) {
         this.url = url;

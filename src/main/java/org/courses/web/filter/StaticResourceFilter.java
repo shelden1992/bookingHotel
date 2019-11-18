@@ -27,8 +27,8 @@ public class StaticResourceFilter implements Filter {
             String pathToForward = APP_PATH + referencePath;
             LOG.info("NOT STATIC resources. Forward to " + pathToForward);
             httpRequest.getRequestDispatcher(pathToForward).forward(request, response);
-
         }
+        return;
 
 
     }

@@ -58,20 +58,20 @@ public class FormDao extends AbstractDao<Form> {
     public boolean create(Form entity) {
         LOG.info("Trying INSERT INTO reservation " + entity);
         return createUpdate(INSERT_INTO, ps -> {
-            ps.setInt(1, entity.getUser().getUserId());
-            ps.setInt(2, entity.getReservation().getReservationId());
+            ps.setInt(1, entity.getUser().getEntityId());
+            ps.setInt(2, entity.getReservation().getEntityId());
             ps.setString(3, entity.getAdditionalInfo());
         });
     }
 
     @Override
     public boolean update(Form entity) {
-        LOG.info("Trying UPDATE form WHERE formId = " + entity.getFormId());
+        LOG.info("Trying UPDATE form WHERE formId = " + entity.getEntityId());
         return createUpdate(UPDATE_FORM_BY_ID, ps -> {
-            ps.setInt(1, entity.getUser().getUserId());
-            ps.setInt(2, entity.getReservation().getReservationId());
+            ps.setInt(1, entity.getUser().getEntityId());
+            ps.setInt(2, entity.getReservation().getEntityId());
             ps.setString(3, entity.getAdditionalInfo());
-            ps.setInt(4, entity.getFormId());
+            ps.setInt(4, entity.getEntityId());
         });
     }
 
