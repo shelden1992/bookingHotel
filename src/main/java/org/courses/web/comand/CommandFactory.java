@@ -24,10 +24,13 @@ public class CommandFactory {
         getCommandMap.put("/team", new TeamCommand());
         getCommandMap.put("/language", new LanguageCommand());
         getCommandMap.put("/gallery", new GalleryCommand());
+        getCommandMap.put("/register-form", new OpenRegisterFormCommand());
+        getCommandMap.put("/login-form", new OpenLoginFormCommand());
+        getCommandMap.put("/logOut", new LogOutCommand());
 
 
         postCommandMap.put("/", new HomeCommand());
-        postCommandMap.put("/login", new LoginCommand());
+        postCommandMap.put("/logIn", new LogInCommand());
         postCommandMap.put("/register", new RegisterUserCommand());
     }
 

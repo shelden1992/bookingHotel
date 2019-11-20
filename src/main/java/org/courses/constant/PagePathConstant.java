@@ -8,5 +8,8 @@ public class PagePathConstant {
     public static final String EVENT = "/ui/pages/event.jsp";
     public static final String TEAM = "/ui/pages/team.jsp";
     public static final String GALLERY = "/ui/pages/gallery.jsp";
-    public static final String UI_LOGIN_JSP = "/ui/pages/login.jsp";
+    public static final String UI_LOGIN_JSP = "/ui/pages/login-form.jsp";
+    public static final String UI_PAGES_REGISTER_FORM_JSP = "/ui/pages/register-form.jsp";
+    public static final String UI_PAGES_LOGIN_FORM_JSP = "/ui/pages/login-form.jsp";
+
 }

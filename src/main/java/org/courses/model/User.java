@@ -2,7 +2,7 @@ package org.courses.model;
 
 import java.util.StringJoiner;
 
-public class User extends Entity{
+public class User extends Entity {
     private String name;
     private String surname;
     private String email;
@@ -30,6 +30,12 @@ public class User extends Entity{
         this.phone = phone;
         this.userRole = userRole;
         this.additionalInfo = additionalInfo;
+    }
+
+    public User(String name, String surname, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
     }
 
     @Override

@@ -9,8 +9,10 @@ public class UserCreateService implements CreateService {
     private UserDao userDao = new UserDao();
 
     @Override
-    public boolean doServiceCreate(Entity entity) {
-
+    public boolean insertEntity(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
         return userDao.create((User) entity);
     }
 }

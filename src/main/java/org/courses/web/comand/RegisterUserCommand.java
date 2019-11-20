@@ -1,43 +1,66 @@
 package org.courses.web.comand;
 
+import org.apache.log4j.Logger;
+import org.courses.constant.PagePathConstant;
 import org.courses.model.User;
 import org.courses.model.UserRole;
-import org.courses.services.CheckReCreationSevice;
+import org.courses.services.CheckIsExistService;
 import org.courses.services.CorrectDataService;
 import org.courses.services.CreateService;
-import org.courses.services.userServices.UserCheckReCreationService;
-import org.courses.services.userServices.UserCorrectDataService;
+import org.courses.services.CryptographyService;
+import org.courses.services.userServices.UserCheckIsExistService;
+import org.courses.services.userServices.UserCorrectDataToRegisterService;
 import org.courses.services.userServices.UserCreateService;
+import org.courses.services.userServices.UserCryptographyService;
 import org.courses.web.data.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RegisterUserCommand implements Command {
-    private CreateService create = new UserCreateService();
-    private CorrectDataService correctDataService = new UserCorrectDataService();
-    private CheckReCreationSevice checkReCreationSevice = new UserCheckReCreationService();
+    private static final Logger LOG = Logger.getLogger(RegisterUserCommand.class);
+    private static final String IS_REGISTER_SUCCESSFUL = "isRegisterSuccessful";
+    private CreateService createUser = new UserCreateService();
+    private CorrectDataService correctDataUser = new UserCorrectDataToRegisterService();
+    private CheckIsExistService checkIsExistUser = new UserCheckIsExistService();
+    private CryptographyService cryptographyPassword = new UserCryptographyService();
 
     @Override
 
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
+        HttpSession session = request.getSession();
         request.getServletPath();
         User user = getUser(request);
-        if (!correctDataService.isCorrectData(user)) {
-//            return to register form again and send message unhappy register try again
-//            return new Page("/#register", true);
-//            if already have account, check in db
-        } else if (checkReCreationSevice.isAlreadyCreation(user)) {
-//            return  register form again and send message already register try, please sign in
-//        and now create user
-        } else if (create.doServiceCreate(user)) {
-//        only this place happy case
-//        and send hello user.name()
+
+        if (notCorrectDataUser(user) || checkIsExistUser.isExist(user)) {
+
+            return notSuccessfulRegisterCase(request);
+        }
+        setUserEncryptionPassword(user);
+        if (createUser.insertEntity(user)) {
+            LOG.info("Register successfully");
+            session.setAttribute("user", user);
+            request.setAttribute(IS_REGISTER_SUCCESSFUL, true);
         }
 
 
-        return new Page("/", true);
+        return new Page(PagePathConstant.UI_PAGES_REGISTER_FORM_JSP);
+    }
+
+    private Page notSuccessfulRegisterCase(HttpServletRequest request) {
+        LOG.info("Register unsuccessfully");
+        request.setAttribute(IS_REGISTER_SUCCESSFUL, false);
+        return new Page(PagePathConstant.UI_PAGES_REGISTER_FORM_JSP);
+    }
+
+    private void setUserEncryptionPassword(User user) {
+        user.setPassword(cryptographyPassword.encryption(user.getPassword()));
+    }
+
+    private boolean notCorrectDataUser(User user) {
+        return !correctDataUser.isCorrectData(user);
     }
 
     private User getUser(HttpServletRequest request) {

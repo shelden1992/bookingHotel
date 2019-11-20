@@ -1,4 +1,4 @@
-CREATE SCHEMA bookingHotel CHARACTER SET utf8 collate utf8_general_ci;
+CREATE SCHEMA booking_hotel CHARACTER SET utf8 collate utf8_general_ci;
 USE booking_hotel;
 
 create table user_role

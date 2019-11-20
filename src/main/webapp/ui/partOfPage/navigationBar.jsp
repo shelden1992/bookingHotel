@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
+<c:set var="user" value="${sessionScope.user}"/>
+
 <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="templateux-navbar">
     <div class="container">
         <a class="navbar-brand" href="${pageContext.request.contextPath}"><span class="text-danger">Booking</span>Hotel</a>
@@ -13,9 +15,7 @@
             <span></span>
             <span></span>
         </div>
-        <!-- END menu-toggle -->
 
-        <%--        navigation--%>
         <div class="collapse navbar-collapse" id="templateux-navbar-nav">
             <ul class="navbar-nav ml-5">
                 <li class="nav-item"><a class="nav-link" href=${pageContext.request.contextPath}> <fmt:message
@@ -44,14 +44,33 @@
                         <span class="pb_rounded-4 px-4 rounded"><fmt:message
                                 key="navigation.bookingForm.booking"/></span></a>
                 </li>
+
+
+                <a <%--href="${pageContext.request.contextPath}/language?locale=en"--%> class="text-uppercase">
+    <span class="text-danger">
+    <c:if test="${sessionScope.user != null}">
+        <c:out value="${user.name}"/>
+
+     </span>
+                </a>
+
                 <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
-                    <a class="nav-link" href="#"
-                       data-toggle="modal"
-                       data-target="#register">
-                        <span class="pb_rounded-4 px-3 rounded"><fmt:message
-                                key="navigation.registerForm.register"/></span></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/logOut">
+    <span class="pb_rounded-4 px-3 rounded"><fmt:message
+            key="navigation.registerForm.signOut"/></span></a>
 
                 </li>
+
+                </c:if>
+
+                <c:if test="${sessionScope.user == null}">
+                    <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/login-form">
+    <span class="pb_rounded-4 px-3 rounded"><fmt:message
+            key="navigation.registerForm.signIn"/></span></a>
+
+                    </li>
+                </c:if>
 
 
             </ul>
@@ -61,7 +80,6 @@
             </div>
 
         </div>
-        <%--        end navigation--%>
     </div>
 </nav>
 
@@ -82,12 +100,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="name"><fmt:message
+                                    <label class="text-black font-weight-bold" for="nameForBooking"><fmt:message
                                             key="navigation.bookingForm.name"/></label>
                                     <input type="text" id="nameForBooking" class="form-control ">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="phone"><fmt:message
+                                    <label class="text-black font-weight-bold" for="phoneForBooking"><fmt:message
                                             key="navigation.bookingForm.phone"/></label>
                                     <input type="text" id="phoneForBooking" class="form-control ">
                                 </div>
@@ -95,7 +113,7 @@
 
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="email">Email</label>
+                                    <label class="text-black font-weight-bold" for="emailForBooking">Email</label>
                                     <input type="email" id="emailForBooking" class="form-control ">
                                 </div>
                             </div>
@@ -140,7 +158,7 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="submit" value="<fmt:message
-                                            key="navigation.bookingForm.bookingNow"/>"
+            key="navigation.bookingForm.bookingNow"/>"
                                            class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                                 </div>
                             </div>
@@ -154,134 +172,3 @@
         </div>
     </div>
 </div>
-<div class="modal fade " id="register" tabindex="-1" role="dialog" aria-labelledby="RegisterFormTitle"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" data-dismiss="" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
-
-                        <form action="${pageContext.request.contextPath}/register" method="post"
-                              class="bg-white p-4">
-                            <div class="row mb-4">
-                                <div class="col-12"><h2><fmt:message key="navigation.registerForm.register"/></h2></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="name"><fmt:message
-                                            key="navigation.registerForm.name"/></label>
-                                    <input type="text" id="name" class="form-control " name="name">
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="surname"><fmt:message
-                                            key="navigation.registerForm.surname"/></label>
-                                    <input type="text" id="surname" class="form-control " name="surname">
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="password"><fmt:message
-                                            key="navigation.registerForm.password"/></label>
-                                    <input type="password" id="password" class="form-control " name="password">
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="phone"><fmt:message
-                                            key="navigation.registerForm.phone"/></label>
-                                    <input type="text" id="phone" class="form-control " name="phone">
-                                </div>
-
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="email">Email</label>
-                                    <input type="email" id="email" class="form-control " name="email">
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="message"><fmt:message
-                                            key="navigation.bookingForm.notes"/></label>
-                                    <textarea name="additionalInfo" id="messageRegister" class="form-control " cols="30"
-                                              rows="8"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-content-end w-100 col-auto">
-                                    <input type="submit" value="<fmt:message
-                                            key="navigation.banner.register"/>"
-                                           style="right: auto; align-self: flex-end;"
-                                           class="btn btn-primary">
-
-                                    <div class="text-right">
-
-                                        <p><fmt:message key="navigation.registerForm.alreadyHaveaccount"/></p>
-                                        <a class="nav-link btn btn-primary"
-                                           data-toggle="modal"
-                                           data-target="#login"
-                                           href="#login"><fmt:message
-                                                key="navigation.registerForm.signIn"/></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade " id="login" tabindex="-1" role="dialog" aria-labelledby="RegisterFormTitle"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered " role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
-
-                        <form action="${pageContext.request.contextPath}/login" method="post"
-                              class="bg-white p-4">
-                            <div class="row mb-4">
-                                <div class="col-12"><h2><fmt:message key="navigation.registerForm.signIn"/></h2></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="name"><fmt:message
-                                            key="navigation.registerForm.name"/></label>
-                                    <input type="text" id="nameLogin" class="form-control " name="name">
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="surname"><fmt:message
-                                            key="navigation.registerForm.surname"/></label>
-                                    <input type="text" id="surnameLogin" class="form-control " name="surname">
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="password"><fmt:message
-                                            key="navigation.registerForm.password"/></label>
-                                    <input type="password" id="passwordLogin" class="form-control " name="password">
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-content-end w-100 col-auto">
-                                        <input type="submit" value="<fmt:message
-                                            key="navigation.registerForm.signIn"/>"
-                                               style="right: auto; align-self: flex-end;"
-                                               class="btn btn-primary">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
