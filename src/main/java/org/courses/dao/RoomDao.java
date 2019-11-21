@@ -1,6 +1,7 @@
 package org.courses.dao;
 
 import org.apache.log4j.Logger;
+import org.courses.model.Photo;
 import org.courses.model.Room;
 import org.courses.model.RoomType;
 
@@ -57,8 +58,11 @@ public class RoomDao extends AbstractDao<Room> {
     }
 
     private Room getRoom(ResultSet resultSet) throws SQLException {
-        return new Room(resultSet.getInt(ROOM_NUMB), resultSet.getBoolean(IS_RESERVED),
-                resultSet.getInt(PLACE), resultSet.getDouble(PRICE), getRoomType(resultSet.getString(TYPE)));
+
+        int roomId = resultSet.getInt(ROOM_NUMB);
+        List<Photo> allPhotosRoom = new PhotoRoomDao().getAllPhotosRoom(roomId);
+        return new Room(roomId, resultSet.getBoolean(IS_RESERVED),
+                resultSet.getInt(PLACE), resultSet.getDouble(PRICE), getRoomType(resultSet.getString(TYPE)), allPhotosRoom);
     }
 
     @Override
@@ -74,7 +78,7 @@ public class RoomDao extends AbstractDao<Room> {
 
     @Override
     public boolean update(Room entity) {
-        LOG.debug("Trying UPDATE room  WHERE idEntity = " + entity.getEntityId());
+        LOG.info("Trying UPDATE room  WHERE idEntity = " + entity.getEntityId());
         return createUpdate(UPDATE_USER_BY_ID, ps -> {
             ps.setBoolean(1, entity.isReserved());
             ps.setInt(2, entity.getPlace());

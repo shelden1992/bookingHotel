@@ -624,33 +624,6 @@ textarea.form-control {
 				bottom: 10px!important;
 			}
 		}
-	}&.major-caousel-modif-hidden-nav {
-		// box-shadow: 0 10px 70px -10px rgba(0,0,0,.2);
-		.owl-stage-outer {
-			padding-top: 0!important;
-			padding-bottom: 0!important;
-		}
-
-		.owl-stage-outer {
-			padding-top: 30px;
-			padding-bottom: 30px;
-		}
-		.slider-item {
-			height: inherit;
-			min-height: inherit;
-
-			img {
-				margin-bottom: 0;
-
-			}
-		}
-
-		.owl-dots {
-			//bottom: 50px!important;
-			//@include media-breakpoint-down(md) {
-			//	bottom: 10px!important;
-			//}
-		}
 	}
 	&.js-carousel-2 {
 		.slider-item {

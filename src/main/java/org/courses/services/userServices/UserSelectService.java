@@ -9,7 +9,7 @@ public class UserSelectService implements SelectEntityService {
     private UserDao userDao = new UserDao();
 
     @Override
-    public Entity selectEntity(Entity entity) {
+    public Entity getEntity(Entity entity) {
         if (entity==null){
             return null;
         }

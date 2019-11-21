@@ -32,7 +32,7 @@ public class LogInCommand implements Command {
         if (notCorrectDataUser(user)) {
             return notSuccessfulLogInCase(request);
         }
-        User entityFromDb = (User) selectEntityService.selectEntity(user);
+        User entityFromDb = (User) selectEntityService.getEntity(user);
         if (notCorrectDataUser(entityFromDb)) {
             return notSuccessfulLogInCase(request);
         }

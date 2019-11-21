@@ -3,13 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
-<!DOCTYPE HTML>
 <html>
 <head>
     <base href="${pageContext.request.contextPath}/ui/">
+    <title>Booking Hotel</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Booking hotel room</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css"
@@ -22,6 +21,7 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
     <link rel="stylesheet" href="css/fancybox.min.css">
+
     <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
 
@@ -30,10 +30,10 @@
 </head>
 <body data-spy="scroll" data-target="#templateux-navbar" data-offset="200">
 
-<%@include file="../ui/partOfPage/navigationBar.jsp" %>
+<%@include file="components/navigationBar.jsp" %>
+<!-- END nav -->
 
-
-<section class="site-hero overlay" style="background-image: url(images/sea-view-1.jpg)"
+<section class="site-hero overlay" style="background-image: url(./images/sea-view-1.jpg)"
          data-stellar-background-ratio="0.5" id="section-home">
     <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
@@ -56,7 +56,7 @@
         <div class="row check-availabilty" id="next">
             <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
-                <form action="#">
+                <form action="${pageContext.request.contextPath}/check-availabilty">
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                             <label for="checkin_date" class="font-weight-bold text-black"><fmt:message
@@ -81,31 +81,52 @@
                                             key="navigation.bookingForm.adults"/></label>
                                     <div class="field-icon-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="adults" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                            <option value="">3</option>
-                                            <option value="">4+</option>
+                                        <select name="adults" id="adults" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="roomType" class="font-weight-bold text-black"><fmt:message
+                                            key="navigation.bookingForm.roomType"/></label>
+                                    <div class="field-icon-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="roomType" id="roomType" class="form-control">
+                                            <option value="ALL" name="ALL"><fmt:message
+                                                    key="selectionRooms.header.all"/></option>
+                                            <option value="COMFORT"><fmt:message
+                                                    key="selectionRooms.header.roomTypeComfort"/></option>
+                                            <option value="FAMILY_REST" name="FAMILY_REST"><fmt:message
+                                                    key="selectionRooms.header.roomTypeFamilyRest"/></option>
+                                            <option value="RELAX"><fmt:message
+                                                    key="selectionRooms.header.roomTypeRelax"/></option>
+                                            <option value="BUSINESS"><fmt:message
+                                                    key="selectionRooms.header.roomTypeBusiness"/></option>
+                                            <option value="LUX"><fmt:message
+                                                    key="selectionRooms.header.roomTypeLux"/></option>
+
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 align-self-end">
+
+                        <div class="col-md-6 col-lg-3 align-self-center">
                             <button class="btn btn-primary btn-block text-white"><fmt:message
                                     key="navigation.bookingForm.checkAvailabilty"/></button>
                         </div>
                     </div>
                 </form>
             </div>
-
-
         </div>
     </div>
 </section>
 
 <!--describe hotel-->
-<%@include file="../ui/partOfPage/about.jsp" %>
+<%--<%@include file="./pages/partOfPage/about.jsp" %>--%>
 <!-- END .block-1 -->
 
 
@@ -122,7 +143,8 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_1.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
+                        <img src="./images/person_1.jpg" alt="Image placeholder"
+                             class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
 
@@ -133,7 +155,8 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_2.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
+                        <img src="./images/person_2.jpg" alt="Image placeholder"
+                             class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
                         <p><fmt:message key="home.banner.peopleSay2"/></p>
@@ -143,7 +166,8 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_10.png" alt="Image placeholder" class="rounded-circle mx-auto">
+                        <img src="./images/person_10.png" alt="Image placeholder"
+                             class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
 
@@ -155,7 +179,8 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_11.jpeg" alt="Image placeholder" class="rounded-circle mx-auto">
+                        <img src="./images/person_11.jpeg" alt="Image placeholder"
+                             class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
 
@@ -166,7 +191,8 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_12.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
+                        <img src="./images/person_12.jpg" alt="Image placeholder"
+                             class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
                         <p><fmt:message key="home.banner.peopleSay5"/></p>
@@ -176,7 +202,8 @@
 
                 <div class="testimonial text-center slider-item">
                     <div class="author-image mb-3">
-                        <img src="images/person_14.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
+                        <img src="./images/person_14.jpg" alt="Image placeholder"
+                             class="rounded-circle mx-auto">
                     </div>
                     <blockquote>
 
@@ -191,9 +218,7 @@
 
     </div>
 </section>
-<!-- END .block35 -->
 
-<!--contact last-->
 <section class="section contact-section" id="section-contact">
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
@@ -204,7 +229,6 @@
         </div>
         <div class="row">
             <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-
                 <form method="post" class="bg-white p-md-5 p-4 mb-5 border">
                     <div class="row">
                         <div class="col-md-6 form-group">
@@ -216,7 +240,6 @@
                             <input type="text" name="phone" id="phone" class="form-control ">
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="email">Email</label>
@@ -237,11 +260,7 @@
                             <div class="submitting"></div>
                         </div>
                     </div>
-
-
                 </form>
-
-
             </div>
             <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="row">
@@ -262,19 +281,9 @@
 
 <!-- END .block-5 -->
 
-<%@include file="../ui/partOfPage/endPage.jsp" %>
+<%@include file="components/endPage.jsp" %>
+<%@include file="components/scripts.jsp" %>
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/jquery.timepicker.min.js"></script>
-<script src="js/main.js"></script>
+
 </body>
 </html>

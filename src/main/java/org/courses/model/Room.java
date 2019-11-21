@@ -1,5 +1,6 @@
 package org.courses.model;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 public class Room extends Entity {
@@ -7,13 +8,23 @@ public class Room extends Entity {
     private int place;
     private double price;
     private RoomType roomType;
+    private List<Photo> photoList;
 
-    public Room(int id, boolean reserved, int place, double price, RoomType roomType) {
+    public Room(int id, boolean reserved, int place, double price, RoomType roomType, List<Photo> photoList) {
         this.id = id;
         this.reserved = reserved;
         this.place = place;
         this.price = price;
         this.roomType = roomType;
+        this.photoList = photoList;
+    }
+
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 
     public double getPrice() {
