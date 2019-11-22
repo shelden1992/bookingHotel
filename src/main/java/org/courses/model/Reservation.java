@@ -1,11 +1,19 @@
 package org.courses.model;
 
 import java.sql.Date;
+import java.util.StringJoiner;
 
 public class Reservation extends Entity  {
     private Room room;
     private Date startReservation;
     private Date finishReservation;
+
+
+    public Reservation(Room room, Date startReservation, Date finishReservation) {
+        this.room = room;
+        this.startReservation = startReservation;
+        this.finishReservation = finishReservation;
+    }
 
     public Reservation(int id, Room room, Date startReservation, Date finishReservation) {
         this.id = id;
@@ -40,6 +48,16 @@ public class Reservation extends Entity  {
 
     public Date getFinishReservation() {
         return finishReservation;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Reservation.class.getSimpleName() + "[", "]")
+                .add("room=" + room)
+                .add("startReservation=" + startReservation)
+                .add("finishReservation=" + finishReservation)
+                .add("id=" + id)
+                .toString();
     }
 
     public void setFinishReservation(Date finishReservation) {

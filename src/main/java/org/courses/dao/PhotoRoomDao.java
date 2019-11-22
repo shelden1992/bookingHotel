@@ -17,8 +17,8 @@ public class PhotoRoomDao extends AbstractDao<Photo> {
 
     private static final String SELECT_ALL = "SELECT_ALL * FROM " + PHOTO_ROOM + ";";
     private static final String SELECT_BY_ID = "SELECT_ALL * FROM " + PHOTO_ROOM + " WHERE " + ID_PHOTO + " =?;";
-    private static final String SELECT_ALL_PHOTO_BY_ROOM_ID = "SELECT_ALL * FROM " + PHOTO_ROOM + "JOIN " +
-            ROOM + " ON " + PHOTO_ROOM + "." + ROOM_NUMB + " = " + ROOM + "." + ROOM_NUMB + " WHERE " + ROOM + "." + ID_PHOTO + " =?;";
+    private static final String SELECT_ALL_PHOTO_BY_ROOM_ID = "SELECT * FROM " + PHOTO_ROOM + " JOIN " +
+            ROOM + " ON " + PHOTO_ROOM + "." + ROOM_NUMB + " = " + ROOM + "." + ROOM_NUMB + " WHERE " + ROOM + "." + ROOM_NUMB + " =?;";
     private static final String INSERT_INTO = "INSERT INTO " + PHOTO_ROOM + "(" + PHOTO_LINK + ") VALUES(?);";
     private static final String DELETE = "DELETE FROM " + PHOTO_ROOM + " WHERE " + ID_PHOTO + "= ?;";
     ;

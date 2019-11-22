@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-12 col-lg-7 ml-auto order-lg-2 position-relative mb-5" data-aos="fade-up">
-                <img src="/images/food-1.jpg" alt="Image" class="img-fluid rounded">
+                <img src="images/food-1.jpg" alt="Image" class="img-fluid rounded">
             </div>
             <div class="col-md-12 col-lg-4 order-lg-1" data-aos="fade-up">
                 <h3 class="heading mb-3"><fmt:message key="about.inform.relax"/></h3>

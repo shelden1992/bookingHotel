@@ -63,7 +63,6 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     listEntity.add(mapper.map(resultSet));
-                    System.out.println();
                 }
             }
         } catch (SQLException e) {

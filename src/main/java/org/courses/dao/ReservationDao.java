@@ -1,6 +1,7 @@
 package org.courses.dao;
 
 import org.apache.log4j.Logger;
+import org.courses.dto.ReservationDto;
 import org.courses.model.Reservation;
 import org.courses.model.Room;
 
@@ -17,6 +18,9 @@ public class ReservationDao extends AbstractDao<Reservation> {
     private static final String ROOM_NUMB = "room_numb";
     private static final String START_RESERVATION = "start_reservation";
     private static final String FINISH_RESERVATION = "finish_reservation";
+    private static final String PLACE = "place";
+    private static final String ROOM_TYPE = "type";
+    private static final String ROOM_TYPE_ALL = "ALL";
     private static final String SELECT_FROM = "SELECT * FROM " + RESERVATION + ";";
     private static final String SELECT_BY_ID = "SELECT * FROM " + RESERVATION + " WHERE " + RESERVATION_ID + " =?;";
     private static final String SELECT_RESERVATION_BY_ROOM_NUMB = "SELECT * FROM " +
@@ -34,6 +38,14 @@ public class ReservationDao extends AbstractDao<Reservation> {
             RESERVATION + "as reserv JOIN " + ROOM + " as r on reserv." + ROOM_NUMB + "= r." + ROOM_NUMB + " WHERE ? AND ? NOT BETWEEN "
             + START_RESERVATION + " AND "
             + FINISH_RESERVATION + ";";
+
+
+    private static final String SELECT_FREE_ROOM_BETWEEN_DATE_AND_SOME_ROOM_TYPE_AND_PLACE = "SELECT * FROM " +
+            RESERVATION + " as reserv JOIN " + ROOM + " as r on reserv." + ROOM_NUMB + "= r." + ROOM_NUMB + " WHERE ? AND ? NOT BETWEEN "
+            + "reserv." + START_RESERVATION + " AND "
+            + "reserv." + FINISH_RESERVATION + " AND "
+            + "r." + PLACE + ">=? AND "
+            + "r." + ROOM_TYPE + "=? OR \'" + ROOM_TYPE_ALL + "\' = ?;";
     private static final String DELETE = "DELETE FROM " +
             RESERVATION + " WHERE " + RESERVATION_ID + " =?;";
     private static final String INSERT_INTO = "INSERT INTO " +
@@ -105,6 +117,18 @@ public class ReservationDao extends AbstractDao<Reservation> {
         return getListEntityWithCondition(SELECT_FREE_ROOM_BETWEEN_DATE, ps -> {
                     ps.setDate(1, startDate);
                     ps.setDate(2, finishDate);
+                },
+                this::getReservation);
+    }
+
+    public List<Reservation> getAllReservationWithNotReservedRoomsBetweenDateSomeRoomType(ReservationDto entity) {
+        LOG.info("Trying SELECT all reservation all not reserved rooms between date " + entity.getStartReservation() + " and " + entity.getFinishReservation());
+        return getListEntityWithCondition(SELECT_FREE_ROOM_BETWEEN_DATE_AND_SOME_ROOM_TYPE_AND_PLACE, ps -> {
+                    ps.setDate(1, entity.getStartReservation());
+                    ps.setDate(2, entity.getFinishReservation());
+                    ps.setInt(3, entity.getAdults());
+                    ps.setString(4, entity.getRoomType().getName());
+                    ps.setString(5, entity.getRoomType().getName());
                 },
                 this::getReservation);
     }

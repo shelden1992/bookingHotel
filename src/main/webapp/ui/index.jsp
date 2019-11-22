@@ -56,22 +56,22 @@
         <div class="row check-availabilty" id="next">
             <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
-                <form action="${pageContext.request.contextPath}/check-availabilty">
+                <form action="${pageContext.request.contextPath}/check-availabilty" method="post">
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkin_date" class="font-weight-bold text-black"><fmt:message
+                            <label for="checkin_date" name="checkin_date" class="font-weight-bold text-black"><fmt:message
                                     key="navigation.bookingForm.dataCheckIn"/> </label>
                             <div class="field-icon-wrap">
                                 <div class="icon"><span class="icon-calendar"></span></div>
-                                <input type="text" id="checkin_date" class="form-control">
+                                <input type="text" id="checkin_date" name="checkin-date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkout_date" class="font-weight-bold text-black"><fmt:message
+                            <label for="checkout_date"  class="font-weight-bold text-black"><fmt:message
                                     key="navigation.bookingForm.dataCheckOut"/> </label>
                             <div class="field-icon-wrap">
                                 <div class="icon"><span class="icon-calendar"></span></div>
-                                <input type="text" id="checkout_date" class="form-control">
+                                <input type="text" id="checkout_date" name="checkout-date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
@@ -90,16 +90,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="roomType" class="font-weight-bold text-black"><fmt:message
+                                    <label for="roomType" class="font-weight-bold text-black" ><fmt:message
                                             key="navigation.bookingForm.roomType"/></label>
-                                    <div class="field-icon-wrap">
+                                    <div class="field-icon-wrap" onclick="">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                         <select name="roomType" id="roomType" class="form-control">
                                             <option value="ALL" name="ALL"><fmt:message
                                                     key="selectionRooms.header.all"/></option>
                                             <option value="COMFORT"><fmt:message
                                                     key="selectionRooms.header.roomTypeComfort"/></option>
-                                            <option value="FAMILY_REST" name="FAMILY_REST"><fmt:message
+                                            <option value="FAMILY REST" name="FAMILY REST"><fmt:message
                                                     key="selectionRooms.header.roomTypeFamilyRest"/></option>
                                             <option value="RELAX"><fmt:message
                                                     key="selectionRooms.header.roomTypeRelax"/></option>
@@ -125,9 +125,9 @@
     </div>
 </section>
 
-<!--describe hotel-->
-<%--<%@include file="./pages/partOfPage/about.jsp" %>--%>
-<!-- END .block-1 -->
+<%--<!--describe hotel-->--%>
+<%@include file="components/about.jsp" %>
+<%--<!-- END .block-1 -->--%>
 
 
 <!--reviews-->

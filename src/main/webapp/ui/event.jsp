@@ -59,8 +59,9 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 post" data-aos="fade-up" data-aos-delay="100">
 
                 <div class="media media-custom d-block mb-4 h-70">
-                    <a href="#" class="mb-4 d-block"><img src="images/img_1.jpg" alt="Image placeholder"
-                                                          class="img-fluid"></a>
+                    <a href="${pageContext.request.contextPath}#section-contact" class="mb-4 d-block"><img
+                            src="images/banquets.jpg" alt="Image placeholder"
+                            class="img-fluid"></a>
                     <div class="media-body">
                         <%--                        <span class="meta-post">February 26, 2018</span>--%>
                         <h2 class="mt-0 mb-3"><a href="#"><fmt:message key="event.start.banquets"/></a></h2>
@@ -71,8 +72,9 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 post" data-aos="fade-up" data-aos-delay="200">
                 <div class="media media-custom d-block mb-4 h-70">
-                    <a href="#" class="mb-4 d-block"><img src="images/img_2.jpg" alt="Image placeholder"
-                                                          class="img-fluid"></a>
+                    <a href="${pageContext.request.contextPath}#section-contact" class="mb-4 d-block"><img
+                            src="images/wedding.jpg" alt="Image placeholder"
+                            class="img-fluid"></a>
                     <div class="media-body">
                         <%--                        <span class="meta-post">February 26, 2018</span>--%>
                         <h2 class="mt-0 mb-3"><a href="#"><fmt:message key="event.start.weddings"/></a></h2>
@@ -82,8 +84,9 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 post" data-aos="fade-up" data-aos-delay="300">
                 <div class="media media-custom d-block mb-4 h-70">
-                    <a href="#" class="mb-4 d-block"><img src="images/img_3.jpg" alt="Image placeholder"
-                                                          class="img-fluid"></a>
+                    <a href="${pageContext.request.contextPath}#section-contact" class="mb-4 d-block"><img
+                            src="images/confer.jpg" alt="Image placeholder"
+                            class="img-fluid"></a>
                     <div class="media-body">
                         <%--                        <span class="meta-post">February 26, 2018</span>--%>
                         <h2 class="mt-0 mb-3"><a href="#"><fmt:message key="event.start.conference"/></a></h2>
@@ -94,8 +97,9 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 post" data-aos="fade-up" data-aos-delay="300">
                 <div class="media media-custom d-block mb-4 h-70">
-                    <a href="#" class="mb-4 d-block"><img src="images/img_3.jpg" alt="Image placeholder"
-                                                          class="img-fluid"></a>
+                    <a href="${pageContext.request.contextPath}#section-contact" class="mb-4 d-block"><img
+                            src="images/catering.jpg" alt="Image placeholder"
+                            class="img-fluid"></a>
                     <div class="media-body">
                         <%--                        <span class="meta-post">February 26, 2018</span>--%>
                         <h2 class="mt-0 mb-3"><a href="#"><fmt:message key="event.start.catering"/></a></h2>

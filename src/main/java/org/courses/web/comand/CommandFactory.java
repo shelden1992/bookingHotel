@@ -27,12 +27,13 @@ public class CommandFactory {
         getCommandMap.put("/register-form", new OpenRegisterFormCommand());
         getCommandMap.put("/login-form", new OpenLoginFormCommand());
         getCommandMap.put("/logOut", new LogOutCommand());
-        getCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
+//        getCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
 
 
         postCommandMap.put("/", new HomeCommand());
         postCommandMap.put("/logIn", new LogInCommand());
         postCommandMap.put("/register", new RegisterUserCommand());
+        postCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
     }
 
     public static Command getCommand(String path, String method) {

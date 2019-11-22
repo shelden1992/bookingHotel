@@ -3,9 +3,9 @@ package org.courses.services.userServices;
 import org.courses.dao.UserDao;
 import org.courses.model.Entity;
 import org.courses.model.User;
-import org.courses.services.CheckIsExistService;
+import org.courses.services.CheckExistService;
 
-public class UserCheckIsExistService implements CheckIsExistService {
+public class UserCheckExistService implements CheckExistService {
     private UserDao userDao = new UserDao();
 
     @Override

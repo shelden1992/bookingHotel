@@ -2,6 +2,6 @@ package org.courses.services;
 
 import org.courses.model.Entity;
 
-public interface CheckIsExistService {
+public interface CheckExistService {
     boolean isExist(Entity entity);
 }

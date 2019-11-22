@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RoomDao extends AbstractDao<Room> {
     private static final Logger LOG = Logger.getLogger(RoomDao.class);
-    private static final RoomType[] ROOM_TYPES = {RoomType.BUSINESS, RoomType.COMFORT, RoomType.FAMILY_REST, RoomType.LUX, RoomType.RELAX};
+    private static final RoomType[] ROOM_TYPES = RoomType.values();
     private static final String ROOM = "room";
     private static final String ROOM_NUMB = "room_numb";
     private static final String IS_RESERVED = "is_reserved";

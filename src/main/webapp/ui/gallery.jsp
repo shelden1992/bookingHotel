@@ -60,37 +60,37 @@
             <div class="col-md-6">
                 <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/event.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room7/room7_img4.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/event.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room7/room7_img4.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room2/room2_img1.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room2/room2_img1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room2/room2_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/image_6.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/image_6.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/image_6.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room4/room4_img3.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room6/room6_img1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room4/room4_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room6/room6_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room5/room5_img1.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room5/room5_img1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room5/room5_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room6/room6_img2.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room6/room6_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room6/room6_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
@@ -102,37 +102,37 @@
 
                 <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room3/room3_img1.jpg"
+                        <a href="${pageContext.request.contextPath}images/catering.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room3/room3_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/catering.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/image_5.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/image_5.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/image_5.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room1/room1_img2.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room1/room1_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room1/room1_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room4/room4_img3.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room8/room8_img1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room4/room4_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room8/room8_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room5/room5_img2.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room8/room8_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room5/room5_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room8/room8_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room6/room6_img2.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room6/room6_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room6/room6_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
@@ -143,37 +143,37 @@
             <div class="col-md-6">
                 <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room1/room1_img1.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/banck.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room1/room1_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/banck.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room2/room2_img3.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/wedding.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room2/room2_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/wedding.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room3/room3_img1.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room3/room3_img1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room3/room3_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room4/room4_img3.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room8/room8_img3.jp"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room4/room4_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room8/room8_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room5/room5_img4.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room9/room9_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room5/room5_img4.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room9/room9_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/sea-view-1.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/sea-view-1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/sea-view-1.jpg" alt="Image placeholder" class="img-fluid"></a>
@@ -184,37 +184,37 @@
             <div class="col-md-6">
                 <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/image_7.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/image_7.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/image_7.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room1/room1_img3.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room1/room1_img3.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room1/room1_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room3/room3_img2.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room3/room3_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room3/room3_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room4/room4_img3.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room9/room9_img2.jpg.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room4/room4_img3.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room9/room9_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room5/room5_img1.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room5/room5_img1.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room5/room5_img1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
-                        <a href="${pageContext.request.contextPath}images/room6/room6_img2.jpg"
+                        <a href="${pageContext.request.contextPath}ui/images/room6/room6_img2.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
                                 src="images/room6/room6_img2.jpg" alt="Image placeholder" class="img-fluid"></a>

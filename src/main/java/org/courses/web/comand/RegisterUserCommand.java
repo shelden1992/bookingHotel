@@ -4,11 +4,11 @@ import org.apache.log4j.Logger;
 import org.courses.constant.PagePathConstant;
 import org.courses.model.User;
 import org.courses.model.UserRole;
-import org.courses.services.CheckIsExistService;
+import org.courses.services.CheckExistService;
 import org.courses.services.CorrectDataService;
 import org.courses.services.CreateService;
 import org.courses.services.CryptographyService;
-import org.courses.services.userServices.UserCheckIsExistService;
+import org.courses.services.userServices.UserCheckExistService;
 import org.courses.services.userServices.UserCorrectDataToRegisterService;
 import org.courses.services.userServices.UserCreateService;
 import org.courses.services.userServices.UserCryptographyService;
@@ -24,7 +24,7 @@ public class RegisterUserCommand implements Command {
     private static final String IS_REGISTER_SUCCESSFUL = "isRegisterSuccessful";
     private CreateService createUser = new UserCreateService();
     private CorrectDataService correctDataUser = new UserCorrectDataToRegisterService();
-    private CheckIsExistService checkIsExistUser = new UserCheckIsExistService();
+    private CheckExistService checkIsExistUser = new UserCheckExistService();
     private CryptographyService cryptographyPassword = new UserCryptographyService();
 
     @Override
