@@ -71,28 +71,31 @@
                             key="selectionRooms.header.roomAndSuites"/></h2>
                 </div>
             </div>
-            <div class="row">
-                <c:forEach items="${listRooms}" var="room" varStatus="loop">
-                <div class="col-md-6">
-                    <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
+            <c:forEach items="${listRooms}" var="room" varStatus="loop">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up"
+                             data-aos-delay="200">
 
-                        <c:forEach items="${room.photoList}" var="photo">
-                            <div class="slider-item">
-                                <a href="${pageContext.request.contextPath}/ui/${photo.photoLink}"
-                                   data-fancybox="images"
-                                   data-caption="Caption for this image"><img src="${photo.photoLink}"
-                                                                              alt="Image placeholder" class="img-fluid"></a>
-                            </div>
-                        </c:forEach>
+                            <c:forEach items="${room.photoList}" var="photo">
+                                <div class="slider-item">
+                                    <a href="${pageContext.request.contextPath}/ui/${photo.photoLink}"
+                                       data-fancybox="images"
+                                       data-caption="Caption for this image"><img src="${photo.photoLink}"
+                                                                                  alt="Image placeholder"
+                                                                                  class="img-fluid"></a>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+
+                    <div class="p-5 text-center room-info">
+                        <h2><c:out value="${room.roomType.name}"/></h2>
+                        <span class="text-uppercase letter-spacing-1"><c:out value="${room.price}"/> </span>
+                        <fmt:message key="selectionRooms.header.roomPerNight"/>
                     </div>
                 </div>
 
-                <div class="p-5 text-center room-info">
-                    <h2><c:out value="${room.roomType}"/></h2>
-                    <span class="text-uppercase letter-spacing-1"><c:out value="${room.price}"/> </span>
-                    <fmt:message key="selectionRooms.header.roomPerNight"/>
-                </div>
-            </div>
             </c:forEach>
         </div>
     </section>

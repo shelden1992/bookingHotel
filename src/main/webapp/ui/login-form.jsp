@@ -81,7 +81,7 @@
                                             <div class="col-md-6 form-group">
                                                 <label class="text-black font-weight-bold" for="nameLogin"><fmt:message
                                                         key="navigation.registerForm.name"/></label>
-                                                <input type="text" id="nameLogin" class="form-control " name="name">
+                                                <input type="text" id="nameLogin" class="form-control " name="name" required="required">
                                             </div>
 
                                             <div class="col-md-6 form-group">
@@ -89,14 +89,14 @@
                                                        for="surnameLogin"><fmt:message
                                                         key="navigation.registerForm.surname"/></label>
                                                 <input type="text" id="surnameLogin" class="form-control "
-                                                       name="surname">
+                                                       name="surname" required="required">
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold"
                                                        for="passwordLogin"><fmt:message
                                                         key="navigation.registerForm.password"/></label>
                                                 <input type="password" id="passwordLogin" class="form-control "
-                                                       name="password">
+                                                       name="password" pattern=".{6,}" title="Six or more characters" required="required">
                                             </div>
                                             <div class="row">
                                                 <div class="d-flex justify-content-between align-content-end w-100 col-auto">

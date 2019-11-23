@@ -2,20 +2,21 @@ package org.courses.web.comand;
 
 import org.apache.log4j.Logger;
 import org.courses.constant.PagePathConstant;
-import org.courses.dao.ReservationDao;
 import org.courses.dto.ReservationDto;
+import org.courses.factory.AbstractServiceFactory;
+import org.courses.factory.ReservationServiceFactory;
+import org.courses.model.Entity;
 import org.courses.model.Reservation;
 import org.courses.model.Room;
 import org.courses.model.RoomType;
-import org.courses.services.SelectRoomService;
-import org.courses.services.reservationServices.CheckValidDateService;
-import org.courses.services.reservationServices.DateProcessingService;
+import org.courses.services.ServiceType;
+import org.courses.services.reservationServices.DateProcessingServiceImpl;
+import org.courses.services.reservationServices.RoomSelectService;
 import org.courses.web.data.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,23 +28,32 @@ public class CheckAvailabiltyCommand implements Command {
     private static final String CHECKIN_DATE = "checkin-date";
     private static final String CHECKOUT_DATE = "checkout-date";
     private static RoomType[] roomTypes = RoomType.values();
-    private SelectRoomService selectRoomService = new SelectRoomService();
-    private DateProcessingService dateProcessingService = new DateProcessingService();
-    private CheckValidDateService checkValidDateService = new CheckValidDateService();
-    private java.util.Date LOCAL_DATE = new java.util.Date();
-    private ReservationDao reservationDao = new ReservationDao();
+    private DateProcessingServiceImpl dateProcessingService;
+    private RoomSelectService roomSelectService;
 
+    {
+        AbstractServiceFactory abstractServiceFactory = new ReservationServiceFactory();
+        dateProcessingService = (DateProcessingServiceImpl) abstractServiceFactory.getServiceFactory(ServiceType.DATE_PROCESSING_SERVICE);
+        roomSelectService = (RoomSelectService) abstractServiceFactory.getServiceFactory(ServiceType.SELECT_ENTITY_SERVICE);
+    }
 
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
         ReservationDto reservation = getReservation(request);
-        LOG.info("Get check availabilty " + reservation);
-        List<Reservation> freeRoomOnThisDate = reservationDao.getAllReservationWithNotReservedRoomsBetweenDateSomeRoomType(reservation);
-        List<Room> roomList = freeRoomOnThisDate.stream().map(Reservation::getRoom).collect(Collectors.toList());
-        roomList.forEach(room -> room.getPhotoList().forEach(photo -> System.out.println(photo.getPhotoLink())));
+        LOG.info("Get reservation " + reservation);
+        dateProcessingService.setPrepareDateToReservationDto(reservation);
+        List<? extends Entity> allEntity = roomSelectService.getAllEntity(reservation);
+        List<Room> roomList = getRoomList(allEntity);
         request.setAttribute("listCheckAvailabiltyRooms", roomList);
 
         return new Page(PagePathConstant.CHECK_AVAILABILTY);
+    }
+
+    private List<Room> getRoomList(List<? extends Entity> allEntity) {
+        return allEntity.stream().map(ent -> {
+            Reservation reservationCast = (Reservation) ent;
+            return reservationCast.getRoom();
+        }).collect(Collectors.toList());
     }
 
 
@@ -54,37 +64,12 @@ public class CheckAvailabiltyCommand implements Command {
 
     private ReservationDto getReservation(HttpServletRequest request) {
 
-        Date validDateCheckIn = getValidDateCheckIn(request);
-        Date validDateCheckOut = getValidDateCheckOut(request, validDateCheckIn);
+        String dateCheckInString = request.getParameter(CHECKIN_DATE);
+        String dateCheckOutString = request.getParameter(CHECKOUT_DATE);
         int adults = Integer.parseInt(request.getParameter(ADULTS));
         RoomType roomType = getRoomType(request.getParameter(ROOM_TYPE));
-        return new ReservationDto(roomType, adults, validDateCheckIn, validDateCheckOut);
-    }
-
-    private Date getValidDateCheckOut(HttpServletRequest request, Date dateBefore) {
-        Date validDateCheckOut = new java.sql.Date(LOCAL_DATE.getTime());
-        String notParceDateCheckOut = request.getParameter(CHECKOUT_DATE);
-        if (!notParceDateCheckOut.isEmpty()) {
-            Date parceDateCheckOut = dateProcessingService.getSqlDateFromParameter(notParceDateCheckOut);
-            if (parceDateCheckOut.after(dateBefore)) {
-                validDateCheckOut = parceDateCheckOut;
-            }
-        }
-        return validDateCheckOut;
+        return new ReservationDto(roomType, adults, dateCheckInString, dateCheckOutString);
     }
 
 
-    private Date getValidDateCheckIn(HttpServletRequest request) {
-        Date validDateCheckIn = new java.sql.Date(LOCAL_DATE.getTime());
-        String notParceDateCheckIn = request.getParameter(CHECKIN_DATE);
-        if (!notParceDateCheckIn.isEmpty()) {
-            Date parceDateCheckIn = dateProcessingService.getSqlDateFromParameter(notParceDateCheckIn);
-            if (parceDateCheckIn.after(LOCAL_DATE)) {
-                validDateCheckIn = parceDateCheckIn;
-            }
-        }
-        return validDateCheckIn;
-
-
-    }
 }

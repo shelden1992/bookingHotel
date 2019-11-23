@@ -3,7 +3,7 @@ package org.courses.services.userServices;
 import org.courses.dao.UserDao;
 import org.courses.model.Entity;
 import org.courses.model.User;
-import org.courses.services.CheckExistService;
+import org.courses.services.intefaces.CheckExistService;
 
 public class UserCheckExistService implements CheckExistService {
     private UserDao userDao = new UserDao();

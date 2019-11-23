@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
-<c:set var="statusLoginMessage" value="${requestScope.statusLoginMessage}"/>
+<c:set var="statusRegisterMessage" value="${requestScope.statusRegisterMessage}"/>
 <html>
 <head>
     <base href="${pageContext.request.contextPath}/ui/">
@@ -69,31 +69,36 @@
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.registerForm.register"/></h2>
                                                 <h5><span class="text-danger"><c:out
-                                                        value="${statusLoginMessage}"/></span></h5>
+                                                        value="${statusRegisterMessage}"/></span></h5>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 form-group">
                                                 <label class="text-black font-weight-bold" for="name"><fmt:message
                                                         key="navigation.registerForm.name"/></label>
-                                                <input type="text" id="name" class="form-control " name="name">
+                                                <input type="text" id="name" class="form-control " name="name"
+                                                       required="required">
                                             </div>
 
                                             <div class="col-md-6 form-group">
                                                 <label class="text-black font-weight-bold" for="surname"><fmt:message
                                                         key="navigation.registerForm.surname"/></label>
-                                                <input type="text" id="surname" class="form-control " name="surname">
+                                                <input type="text" id="surname" class="form-control " name="surname"
+                                                       required="required">
                                             </div>
                                             <div class="col-mdtext-uppercase-12 form-group">
                                                 <label class="text-black font-weight-bold" for="phone"><fmt:message
                                                         key="navigation.registerForm.phone"/></label>
-                                                <input type="text" id="phone" class="form-control " name="phone">
+                                                <input type="text" id="phone" class="form-control " name="phone"
+                                                       pattern="[\+]\d{2}\d{2}\d{4}\d{4}"
+                                                       title="Phone Number like: +380502087566" required="required">
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="password"><fmt:message
                                                         key="navigation.registerForm.password"/></label>
                                                 <input type="password" id="password" class="form-control "
-                                                       name="password">
+                                                       name="password" pattern=".{6,}" title="Six or more characters"
+                                                       required="required">
                                             </div>
 
                                         </div>
@@ -102,7 +107,8 @@
 
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="email">Email</label>
-                                                <input type="email" id="email" class="form-control " name="email">
+                                                <input type="email" id="email" class="form-control " name="email"
+                                                       required="required">
                                             </div>
                                         </div>
                                         <div class="row mb-4">

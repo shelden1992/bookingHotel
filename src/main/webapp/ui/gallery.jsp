@@ -63,7 +63,7 @@
                         <a href="${pageContext.request.contextPath}ui/images/room7/room7_img4.jpg"
                            data-fancybox="images"
                            data-caption="Caption for this image"><img
-                                src="images/room7/room7_img4.jpg" alt="Image placeholder" class="img-fluid"></a>
+                                src="images/room7/room7_img2.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </div>
                     <div class="slider-item">
                         <a href="${pageContext.request.contextPath}ui/images/room2/room2_img1.jpg"

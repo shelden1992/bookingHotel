@@ -100,19 +100,19 @@ public class ReservationDao extends AbstractDao<Reservation> {
         return createUpdate(DELETE, ps -> ps.setInt(1, id));
     }
 
-    public List<Reservation> getAllReservationWithReservedRoomsOnThisDate(Date date) {
+    public List<Reservation> findNotFreeRoomsOnThisDate(Date date) {
         LOG.info("Trying SELECT all reservation all reserved rooms on this date " + date);
         return getListEntityWithCondition(SELECT_RESERVATION_BETWEEN_DATE, ps -> ps.setDate(1, date),
                 this::getReservation);
     }
 
-    public List<Reservation> getAllReservationWithNotReservedRoomsOnThisDate(Date date) {
+    public List<Reservation> findFreeRoomsOnThisDate(Date date) {
         LOG.info("Trying SELECT all reservation all not reserved rooms on this date " + date);
         return getListEntityWithCondition(SELECT_RESERVATION_NOT_BETWEEN_DATE, ps -> ps.setDate(1, date),
                 this::getReservation);
     }
 
-    public List<Reservation> getAllReservationWithNotReservedRoomsBetweenDate(Date startDate, Date finishDate) {
+    public List<Reservation> findFreeRoomsBetweenDate(Date startDate, Date finishDate) {
         LOG.info("Trying SELECT all reservation all not reserved rooms between date " + startDate + " and " + finishDate);
         return getListEntityWithCondition(SELECT_FREE_ROOM_BETWEEN_DATE, ps -> {
                     ps.setDate(1, startDate);
@@ -121,7 +121,7 @@ public class ReservationDao extends AbstractDao<Reservation> {
                 this::getReservation);
     }
 
-    public List<Reservation> getAllReservationWithNotReservedRoomsBetweenDateSomeRoomType(ReservationDto entity) {
+    public List<Reservation> findFreeRoomsBetweenDateByRoomTypeAndAdults(ReservationDto entity) {
         LOG.info("Trying SELECT all reservation all not reserved rooms between date " + entity.getStartReservation() + " and " + entity.getFinishReservation());
         return getListEntityWithCondition(SELECT_FREE_ROOM_BETWEEN_DATE_AND_SOME_ROOM_TYPE_AND_PLACE, ps -> {
                     ps.setDate(1, entity.getStartReservation());
@@ -133,7 +133,7 @@ public class ReservationDao extends AbstractDao<Reservation> {
                 this::getReservation);
     }
 
-    public List<Reservation> getAllReservationRoomByRoomNumb(int roomNumb) {
+    public List<Reservation> findAllReservationsRoomById(int roomNumb) {
         LOG.info("Trying SELECT all reservation by room numb " + roomNumb);
         return getListEntityWithCondition(SELECT_RESERVATION_BY_ROOM_NUMB, ps -> ps.setInt(1, roomNumb),
                 this::getReservation);

@@ -2,8 +2,11 @@ package org.courses.services.userServices;
 
 import org.courses.dao.UserDao;
 import org.courses.model.Entity;
+import org.courses.model.Reservation;
 import org.courses.model.User;
-import org.courses.services.SelectEntityService;
+import org.courses.services.intefaces.SelectEntityService;
+
+import java.util.List;
 
 public class UserSelectService implements SelectEntityService {
     private UserDao userDao = new UserDao();
@@ -16,5 +19,10 @@ public class UserSelectService implements SelectEntityService {
         User user = (User) entity;
 
         return userDao.getUserByNameSurnameAndPhone(user.getName(), user.getSurname());
+    }
+
+    @Override
+    public List<Reservation> getAllEntity(Entity entity) {
+        return null;
     }
 }

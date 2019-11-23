@@ -2,16 +2,15 @@ package org.courses.web.comand;
 
 import org.apache.log4j.Logger;
 import org.courses.constant.PagePathConstant;
+import org.courses.factory.AbstractServiceFactory;
+import org.courses.factory.UserServiceFactory;
 import org.courses.model.User;
 import org.courses.model.UserRole;
-import org.courses.services.CheckExistService;
-import org.courses.services.CorrectDataService;
-import org.courses.services.CreateService;
-import org.courses.services.CryptographyService;
-import org.courses.services.userServices.UserCheckExistService;
-import org.courses.services.userServices.UserCorrectDataToRegisterService;
-import org.courses.services.userServices.UserCreateService;
-import org.courses.services.userServices.UserCryptographyService;
+import org.courses.services.ServiceType;
+import org.courses.services.intefaces.CheckExistService;
+import org.courses.services.intefaces.CreateEntityService;
+import org.courses.services.intefaces.CryptographyService;
+import org.courses.services.intefaces.ValidDataService;
 import org.courses.web.data.Page;
 
 import javax.servlet.ServletException;
@@ -21,13 +20,20 @@ import java.io.IOException;
 
 public class RegisterUserCommand implements Command {
     private static final Logger LOG = Logger.getLogger(RegisterUserCommand.class);
-    private static final String IS_REGISTER_SUCCESSFUL = "isRegisterSuccessful";
-    private CreateService createUser = new UserCreateService();
-    private CorrectDataService correctDataUser = new UserCorrectDataToRegisterService();
-    private CheckExistService checkIsExistUser = new UserCheckExistService();
-    private CryptographyService cryptographyPassword = new UserCryptographyService();
+    private static final String REGISTER_MESSAGE = "statusRegisterMessage";
+    private CreateEntityService createUser;
+    private ValidDataService correctDataUser;
+    private CheckExistService checkIsExistUser;
+    private CryptographyService cryptographyPassword;
 
-    @Override
+    {
+        AbstractServiceFactory abstractServiceFactory = new UserServiceFactory();
+        createUser = (CreateEntityService) abstractServiceFactory.getServiceFactory(ServiceType.CREATE_ENTITY_SERVICE);
+        correctDataUser = (ValidDataService) abstractServiceFactory.getServiceFactory(ServiceType.VALID_DATA_SERVICE);
+        checkIsExistUser = (CheckExistService) abstractServiceFactory.getServiceFactory(ServiceType.CHECK_EXIST_SERVICE);
+        cryptographyPassword = (CryptographyService) abstractServiceFactory.getServiceFactory(ServiceType.CRYPTOGRAPHY_SERVICE);
+    }
+
 
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
         HttpSession session = request.getSession();
@@ -39,10 +45,10 @@ public class RegisterUserCommand implements Command {
             return notSuccessfulRegisterCase(request);
         }
         setUserEncryptionPassword(user);
-        if (createUser.insertEntity(user)) {
-            LOG.info("Register successfully");
+        if (createUser.addedToDbEntity(user)) {
+            LOG.info("Register successfully " + user.getName() + " " + user.getSurname());
             session.setAttribute("user", user);
-            request.setAttribute(IS_REGISTER_SUCCESSFUL, true);
+            request.setAttribute(REGISTER_MESSAGE, "Register successfully");
         }
 
 
@@ -51,7 +57,7 @@ public class RegisterUserCommand implements Command {
 
     private Page notSuccessfulRegisterCase(HttpServletRequest request) {
         LOG.info("Register unsuccessfully");
-        request.setAttribute(IS_REGISTER_SUCCESSFUL, false);
+        request.setAttribute(REGISTER_MESSAGE, "Something wrong. Please, try again.");
         return new Page(PagePathConstant.UI_PAGES_REGISTER_FORM_JSP);
     }
 
@@ -60,7 +66,7 @@ public class RegisterUserCommand implements Command {
     }
 
     private boolean notCorrectDataUser(User user) {
-        return !correctDataUser.isCorrectData(user);
+        return !correctDataUser.isRegisterValid(user);
     }
 
     private User getUser(HttpServletRequest request) {

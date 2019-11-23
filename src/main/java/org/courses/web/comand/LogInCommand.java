@@ -2,14 +2,14 @@ package org.courses.web.comand;
 
 import org.apache.log4j.Logger;
 import org.courses.constant.PagePathConstant;
+import org.courses.factory.AbstractServiceFactory;
+import org.courses.factory.UserServiceFactory;
 import org.courses.model.User;
 import org.courses.model.UserRole;
-import org.courses.services.CorrectDataService;
-import org.courses.services.CryptographyService;
-import org.courses.services.SelectEntityService;
-import org.courses.services.userServices.UserCorrectDataToLoginService;
-import org.courses.services.userServices.UserCryptographyService;
-import org.courses.services.userServices.UserSelectService;
+import org.courses.services.ServiceType;
+import org.courses.services.intefaces.CryptographyService;
+import org.courses.services.intefaces.SelectEntityService;
+import org.courses.services.intefaces.ValidDataService;
 import org.courses.web.data.Page;
 
 import javax.servlet.ServletException;
@@ -20,10 +20,16 @@ import java.io.IOException;
 public class LogInCommand implements Command {
     private static final Logger LOG = Logger.getLogger(LogInCommand.class);
     private static final String LOGIN_MESSAGE = "statusLoginMessage";
-    private CorrectDataService correctDataUser = new UserCorrectDataToLoginService();
-    private SelectEntityService selectEntityService = new UserSelectService();
-    private CryptographyService cryptographyPassword = new UserCryptographyService();
+    private ValidDataService correctDataUser;
+    private SelectEntityService selectEntityService;
+    private CryptographyService cryptographyPassword;
 
+    {
+        AbstractServiceFactory abstractServiceFactory = new UserServiceFactory();
+        correctDataUser = (ValidDataService) abstractServiceFactory.getServiceFactory(ServiceType.VALID_DATA_SERVICE);
+        selectEntityService = (SelectEntityService) abstractServiceFactory.getServiceFactory(ServiceType.SELECT_ENTITY_SERVICE);
+        cryptographyPassword = (CryptographyService) abstractServiceFactory.getServiceFactory(ServiceType.CRYPTOGRAPHY_SERVICE);
+    }
 
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
@@ -73,6 +79,6 @@ public class LogInCommand implements Command {
     }
 
     private boolean notCorrectDataUser(User user) {
-        return !correctDataUser.isCorrectData(user);
+        return !correctDataUser.isLoginValid(user);
     }
 }
