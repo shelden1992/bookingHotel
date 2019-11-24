@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
-<c:set var="form" value="${requestScope.form}"/>
+<c:set var="form" value="${sessionScope.form}"/>
 <c:set var="listRooms" value="${requestScope.listRooms}"/>
 <c:set var="reservation" value="${form.reservation}"/>
 <html>

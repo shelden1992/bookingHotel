@@ -5,16 +5,20 @@ import org.courses.constant.AttributeName;
 import org.courses.constant.PagePathConstant;
 import org.courses.factory.AbstractServiceFactory;
 import org.courses.factory.ReservationServiceFactory;
-import org.courses.model.*;
+import org.courses.model.Form;
+import org.courses.model.Reservation;
+import org.courses.model.Room;
+import org.courses.model.RoomType;
 import org.courses.services.ServiceType;
-import org.courses.services.form.FormSelectService;
 import org.courses.services.reservationServices.DateProcessingServiceImpl;
+import org.courses.services.reservationServices.ReservationSelectService;
 import org.courses.web.data.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,41 +32,50 @@ public class CheckAvailabiltyCommand implements Command {
     private static final String CHECKOUT_DATE = "checkout-date";
     private static RoomType[] roomTypes = RoomType.values();
     private DateProcessingServiceImpl dateProcessingService;
-    private FormSelectService formSelectService;
+    private ReservationSelectService reservationSelectService;
 
     {
         AbstractServiceFactory abstractServiceFactory = new ReservationServiceFactory();
         dateProcessingService = (DateProcessingServiceImpl) abstractServiceFactory.getServiceFactory(ServiceType.DATE_PROCESSING_SERVICE);
-        formSelectService = (FormSelectService) abstractServiceFactory.getServiceFactory(ServiceType.SELECT_ENTITY_SERVICE);
+        reservationSelectService = (ReservationSelectService) abstractServiceFactory.getServiceFactory(ServiceType.SELECT_ENTITY_SERVICE);
     }
 
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
-        Form form = getForm(request);
-        LOG.info("Get form " + form);
-        List<Room> roomList = getRoomList(form);
+        Form formFromAttribute = (Form) request.getSession(false).getAttribute(AttributeName.FORM);
+        Reservation reservation = getReservation(request);
+        List<Room> roomList = getRoomList(reservation);
         if (roomList.isEmpty()) {
             request.setAttribute(AttributeName.EXIST_FREE_ROOMS, ERROR);
             return new Page(PagePathConstant.HOME_URL);
         }
-        User user = getUser(request);
-        if (userLogIn(user)) {
-            form.setUser(user);
+        Form form = null;
+        if (sessionExist(formFromAttribute)) {
+            form = formFromAttribute;
+            form.setReservation(reservation);
+        } else {
+            form = new Form(reservation);
+
         }
+        request.getSession().setAttribute(AttributeName.FORM, form);
         request.setAttribute(AttributeName.LIST_FREE_ROOM, roomList);
-        request.setAttribute(AttributeName.FORM, form);
         return new Page(PagePathConstant.CHECK_AVAILABILTY);
     }
 
-    private boolean userLogIn(User user) {
-        return user != null;
+    private boolean sessionExist(Form formFromAttribute) {
+        return formFromAttribute != null;
     }
 
 
-    private List<Room> getRoomList(Form form) {
-        List<Form> allForms = (List<Form>) formSelectService.getAllEntity(form);
+    private List<Room> getRoomList(Reservation reservation) {
+        List<Reservation> allForms = new ArrayList<>();
+        if ("ALL".equals(reservation.getRoom().getRoomType().getName())) {
+            allForms = (List<Reservation>) reservationSelectService.getAllRoomsByPlace(reservation);
+        } else {
+            allForms = (List<Reservation>) reservationSelectService.getAllEntity(reservation);
+        }
 
-        return allForms.stream().map(f -> f.getReservation().getRoom()).collect(Collectors.toList());
+        return allForms.stream().map(Reservation::getRoom).collect(Collectors.toList());
     }
 
 
@@ -71,30 +84,19 @@ public class CheckAvailabiltyCommand implements Command {
     }
 
 
-    private Form getForm(HttpServletRequest request) {
-        User user = getUser(request);
-        Reservation reservation = getReservation(request);
-        return new Form(user, reservation);
-
-    }
-
     private Reservation getReservation(HttpServletRequest request) {
         Room room = getRoom(request);
         String dateCheckInString = request.getParameter(CHECKIN_DATE);
         String dateCheckOutString = request.getParameter(CHECKOUT_DATE);
         Date validDateCheckIn = dateProcessingService.getValidDateCheckIn(dateCheckInString);
         Date validDateCheckOut = dateProcessingService.getValidDateCheckOut(dateCheckOutString, validDateCheckIn);
-        Reservation reservation = new Reservation(room, validDateCheckIn, validDateCheckOut);
+        long dayDiff = dateProcessingService.getDateDiff(validDateCheckIn, validDateCheckOut);
+        Reservation reservation = new Reservation(room, validDateCheckIn, validDateCheckOut, dayDiff);
         LOG.info("Get reservation " + reservation);
         return reservation;
 
     }
 
-    private User getUser(HttpServletRequest request) {
-        User user = (User) request.getSession(false).getAttribute("user");
-        LOG.info("Get user " + user);
-        return user;
-    }
 
     private Room getRoom(HttpServletRequest request) {
         int adults = Integer.parseInt(request.getParameter(ADULTS));

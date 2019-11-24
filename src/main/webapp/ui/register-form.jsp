@@ -68,7 +68,7 @@
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.registerForm.register"/></h2>
-                                                <c:if test="${statusLoginMessage!=null}">
+                                                <c:if test="${statusRegisterMessage!=null}">
                                                     <h5><span class="text-danger"><fmt:message
                                                             key="${statusRegisterMessage}"/></span></h5>
                                                 </c:if>
@@ -88,7 +88,8 @@
                                                 <input type="text" id="surname" class="form-control " name="surname"
                                                        required="required">
                                             </div>
-                                            <div class="col-mdtext-uppercase-12 form-group">
+
+                                            <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold" for="phone"><fmt:message
                                                         key="navigation.registerForm.phone"/></label>
                                                 <input type="text" id="phone" class="form-control " name="phone"

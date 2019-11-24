@@ -2,11 +2,28 @@ package org.courses.model;
 
 import java.util.StringJoiner;
 
-public class Form extends Entity  {
+public class Form extends Entity {
 
     private User user;
     private Reservation reservation;
     private String additionalInfo;
+    private double total;
+
+    public Form() {
+    }
+
+    public Form(User user, Reservation reservation, String additionalInfo, double total) {
+        this.user = user;
+        this.reservation = reservation;
+        this.additionalInfo = additionalInfo;
+        this.total = total;
+    }
+
+    public Form(User user, Reservation reservation, double total) {
+        this.user = user;
+        this.reservation = reservation;
+        this.total = total;
+    }
 
     public Form(Reservation reservation) {
         this.reservation = reservation;
@@ -19,6 +36,19 @@ public class Form extends Entity  {
         this.additionalInfo = additionalInfo;
     }
 
+    public Form(User user, Reservation reservation) {
+        this.user = user;
+        this.reservation = reservation;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     public String getAdditionalInfo() {
         return additionalInfo;
     }
@@ -27,7 +57,7 @@ public class Form extends Entity  {
         this.additionalInfo = additionalInfo;
     }
 
-        public int getEntityId() {
+    public int getEntityId() {
         return id;
     }
 
@@ -49,17 +79,16 @@ public class Form extends Entity  {
         return user;
     }
 
+    public Form(User user) {
+        this.user = user;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
     public Reservation getReservation() {
         return reservation;
-    }
-
-    public Form(User user, Reservation reservation) {
-        this.user = user;
-        this.reservation = reservation;
     }
 
     public void setReservation(Reservation reservation) {

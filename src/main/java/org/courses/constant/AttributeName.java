@@ -8,4 +8,6 @@ public class AttributeName {
 
     public static final String EXIST_FREE_ROOMS = "existFreeRooms";
     public static final String FORM = "form";
+    public static final String USER = "user";
+    public static final String BOOKING_STATUS = "bookingStatus";
 }

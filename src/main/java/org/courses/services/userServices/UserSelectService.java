@@ -18,7 +18,7 @@ public class UserSelectService implements SelectEntityService {
         }
         User user = (User) entity;
 
-        return userDao.getUserByNameSurnameAndPhone(user.getName(), user.getSurname());
+        return userDao.getUserByNameSurnameAndEmail(user);
     }
 
     @Override

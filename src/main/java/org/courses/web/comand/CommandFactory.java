@@ -34,6 +34,7 @@ public class CommandFactory {
         postCommandMap.put("/logIn", new LogInCommand());
         postCommandMap.put("/register", new RegisterUserCommand());
         postCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
+        postCommandMap.put("/booking-confirm", new BookingConfirmCommand());
     }
 
     public static Command getCommand(String path, String method) {

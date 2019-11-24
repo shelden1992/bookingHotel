@@ -5,7 +5,7 @@ import org.courses.model.Entity;
 import org.courses.model.User;
 import org.courses.services.intefaces.CreateEntityService;
 
-public class UserCreateEntityService implements CreateEntityService {
+public class UserCreateService implements CreateEntityService {
     private UserDao userDao = new UserDao();
 
     @Override

@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
-<c:set var="user" value="${sessionScope.user}"/>
+<c:set var="form" value="${sessionScope.form}"/>
+<c:set var="user" value="${form.user}"/>
 
 <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="templateux-navbar">
     <div class="container">
@@ -48,7 +49,7 @@
 
                 <a <%--href="${pageContext.request.contextPath}/language?locale=en"--%> class="text-uppercase">
     <span class="text-danger">
-    <c:if test="${sessionScope.user != null}">
+    <c:if test="${user!= null}">
         <c:out value="${user.name}"/>
 
      </span>
@@ -63,7 +64,7 @@
 
                 </c:if>
 
-                <c:if test="${sessionScope.user == null}">
+                <c:if test="${user== null}">
                     <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
                         <a class="nav-link" href="${pageContext.request.contextPath}/login-form">
     <span class="pb_rounded-4 px-3 rounded"><fmt:message
@@ -99,8 +100,6 @@
                                 <div class="col-12"><h2><fmt:message
                                         key="navigation.bookingForm.booking"/></h2></div>
                             </div>
-
-
 
 
                             <%--<c:if test="${sessionScope.user != null}">--%>

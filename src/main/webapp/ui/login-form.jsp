@@ -97,6 +97,11 @@
                                                        name="surname" required="required">
                                             </div>
                                             <div class="col-md-12 form-group">
+                                                <label class="text-black font-weight-bold" for="email">Email</label>
+                                                <input type="email" id="email" class="form-control " name="email"
+                                                       required="required">
+                                            </div>
+                                            <div class="col-md-12 form-group">
                                                 <label class="text-black font-weight-bold"
                                                        for="passwordLogin"><fmt:message
                                                         key="navigation.registerForm.password"/></label>
@@ -104,6 +109,7 @@
                                                        name="password" pattern=".{6,}" title="Six or more characters"
                                                        required="required">
                                             </div>
+
                                             <div class="row">
                                                 <div class="d-flex justify-content-between align-content-end w-100 col-auto">
                                                     <div class="text-left">

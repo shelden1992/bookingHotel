@@ -3,10 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
-<c:set var="userDto" value="${requestScope.userDto}"/>
-<c:set var="reservationDto" value="${userDto.reservationDto}"/>
-<c:set var="listRooms" value="${userDto.listRooms}"/>
-<c:set var="user" value="${sessionScope.user}"/>
+<c:set var="form" value="${sessionScope.form}"/>
+<c:set var="reservation" value="${form.reservation}"/>
+<c:set var="room" value="${reservation.room}"/>
+<c:set var="user" value="${form.user}"/>
 
 <html>
 <head>
@@ -71,30 +71,15 @@
                             <div class="row">
                                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
-                                    <form action="${pageContext.request.contextPath}/booking" method="post"
+                                    <form action="${pageContext.request.contextPath}/booking-confirm" method="post"
                                           class="bg-white p-4">
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.bookingForm.booking"/></h2>
 
                                             </div>
-                                           <%-- <div>
-                                                <c:if test="${sessionScope.user == null}">
-                                                    <h5><span class="text-danger"><fmt:message
-                                                            key="navigation.bookingForm.please"/></span> <a
-                                                            href="${pageContext.request.contextPath}/login-form"
-                                                            class="text-danger">
-                                                        <fmt:message
-                                                                key="navigation.bookingForm.enter"/></a> <span
-                                                            class="text-danger"><fmt:message
-                                                            key="navigation.bookingForm.or"/></span>
-                                                        <a class="text-danger"
-                                                           href="${pageContext.request.contextPath}/register-form"><fmt:message
-                                                                key="navigation.bookingForm.register"/></a></h5>
-                                                </c:if>
-                                            </div>--%>
 
-                                            <c:if test="${sessionScope.user != null}">
+                                            <c:if test="${user != null}">
                                         </div>
 
 
@@ -128,14 +113,80 @@
                                             </div>
                                         </div>
 
-                                            <%--                                            <div class="col-md-12 form-group">--%>
-                                            <%--                                                <label class="text-black font-weight-bold"--%>
-                                            <%--                                                       for="passwordLogin"><fmt:message--%>
-                                            <%--                                                        key="navigation.registerForm.password"/></label>--%>
-                                            <%--                                                <input type="password" id="passwordLogin" class="form-control "--%>
-                                            <%--                                                       name="password" pattern=".{6,}" title="Six or more characters"--%>
-                                            <%--                                                       required="required">--%>
-                                            <%--                                            </div>--%>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center form-group">
+
+                                                <div>
+                                                    <label class="text-black font-weight-bold"><fmt:message
+                                                            key="navigation.bookingForm.dataCheckIn"/></label>
+                                                </div>
+                                                <div>
+                                                    <a class="col-12,mb-5 text-black font-weight-bold"
+                                                       style="font-size: xx-large;"> <c:out
+                                                            value="${reservation.startReservation}"/></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 text-center form-group">
+
+                                                <div>
+                                                    <label class="text-black font-weight-bold"><fmt:message
+                                                            key="navigation.bookingForm.dataCheckOut"/></label>
+                                                </div>
+                                                <div>
+                                                    <a class="col-12,mb-5 text-black font-weight-bold"
+                                                       style="font-size: xx-large;"> <c:out
+                                                            value="${reservation.finishReservation}"/></a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center form-group">
+
+                                                <div>
+                                                    <label class="text-black font-weight-bold"><fmt:message
+                                                            key="selectionRooms.header.nights"/></label>
+                                                </div>
+                                                <div>
+                                                    <a class="col-12,mb-5 text-black font-weight-bold"
+                                                       style="font-size: xx-large;"> <c:out
+                                                            value="${reservation.dateDiff}"/></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center form-group">
+
+                                                <div>
+                                                    <label class="text-black font-weight-bold"><fmt:message
+                                                            key="navigation.bookingForm.roomType"/></label>
+                                                </div>
+                                                <div>
+                                                    <a class="col-12,mb-5 text-black font-weight-bold"
+                                                       style="font-size: xx-large;"> <c:out
+                                                            value="${room.roomType}"/></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center form-group">
+
+                                                <div>
+                                                    <label class="text-black font-weight-bold"><fmt:message
+                                                            key="selectionRooms.header.totalCost"/></label>
+                                                </div>
+                                                <div>
+                                                    <a class="col-12,mb-5 text-black font-weight-bold text-danger"
+                                                       style="font-size: xx-large; "> <c:out
+                                                            value="${form.total}"/> <fmt:message
+                                                            key="selectionRooms.header.grn"/></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         </c:if>
                                         <div class="row">
                                             <div class="d-flex justify-content-between align-content-end w-100 col-auto">

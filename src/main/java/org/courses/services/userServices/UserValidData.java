@@ -14,9 +14,13 @@ public class UserValidData implements ValidDataService {
         String name = user.getName();
         String surname = user.getSurname();
         String password = user.getPassword();
+        String email = user.getEmail();
         if (name == null || name.isEmpty()) {
             return false;
         } else if (surname == null || surname.isEmpty()) {
+            return false;
+
+        } else if (email == null || email.isEmpty()) {
             return false;
         } else return password != null && !password.isEmpty();
     }

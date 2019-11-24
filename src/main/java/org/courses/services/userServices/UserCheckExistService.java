@@ -14,10 +14,7 @@ public class UserCheckExistService implements CheckExistService {
             return false;
         }
         User user = (User) entity;
-        String name = user.getName();
-        String surname = user.getSurname();
-        String phone = user.getPhone();
 
-        return userDao.getUserByNameSurnameAndPhone(name, surname, phone) != null;
+        return userDao.getUserByNameSurnameAndEmail(user) != null;
     }
 }

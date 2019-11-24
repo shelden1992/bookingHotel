@@ -13,7 +13,7 @@ public class UserServiceFactory extends AbstractServiceFactory {
     static {
         factoryMap.put(ServiceType.CRYPTOGRAPHY_SERVICE, new UserCryptographyService());
         factoryMap.put(ServiceType.CHECK_EXIST_SERVICE, new UserCheckExistService());
-        factoryMap.put(ServiceType.CREATE_ENTITY_SERVICE, new UserCreateEntityService());
+        factoryMap.put(ServiceType.CREATE_ENTITY_SERVICE, new UserCreateService());
         factoryMap.put(ServiceType.SELECT_ENTITY_SERVICE, new UserSelectService());
         factoryMap.put(ServiceType.VALID_DATA_SERVICE, new UserValidData());
     }

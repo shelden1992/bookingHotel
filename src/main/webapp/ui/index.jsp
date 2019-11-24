@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
+<c:set var="form" value="${sessionScope.form}"/>
+<c:set var="reservation" value="${form.reservation}"/>
+<c:set var="bookingStatus" value="${requestScope.bookingStatus}"/>
 <c:set var="existFreeRooms" value="${requestScope.existFreeRooms}"/>
 <html>
 <head>
@@ -36,13 +39,23 @@
 
 <section class="site-hero overlay" style="background-image: url(./images/sea-view-1.jpg)"
          data-stellar-background-ratio="0.5" id="section-home">
+
+
     <div class="container">
+
+
         <div class="row site-hero-inner justify-content-center align-items-center">
             <div class="col-md-10 text-center" data-aos="fade-up">
                 <h1 class="heading"><fmt:message key="home.banner.header"/></h1>
+                <div class="col-md-12 text-center" data-aos="fade-up">
+                    <c:if test="${bookingStatus!=null}">--%>
+                        <h6 class="heading text-danger"><fmt:message key="${bookingStatus}"/></h6>
+                    </c:if>
+                </div>
             </div>
         </div>
     </div>
+
 
     <a class="mouse smoothscroll" href="#next">
         <div class="mouse-icon">

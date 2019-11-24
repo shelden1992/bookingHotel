@@ -5,6 +5,7 @@ import org.courses.constant.AttributeName;
 import org.courses.constant.PagePathConstant;
 import org.courses.factory.AbstractServiceFactory;
 import org.courses.factory.UserServiceFactory;
+import org.courses.model.Form;
 import org.courses.model.User;
 import org.courses.model.UserRole;
 import org.courses.services.ServiceType;
@@ -20,10 +21,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RegisterUserCommand implements Command {
-    private static final Logger LOG = Logger.getLogger(RegisterUserCommand.class);
     public static final String SUCCESSFUL = "navigation.registerForm.successful";
     public static final String ERROR = "navigation.registerForm.wrongRegister";
-
+    private static final Logger LOG = Logger.getLogger(RegisterUserCommand.class);
     private CreateEntityService createUser;
     private ValidDataService correctDataUser;
     private CheckExistService checkIsExistUser;
@@ -39,10 +39,13 @@ public class RegisterUserCommand implements Command {
 
 
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
-        HttpSession session = request.getSession();
-        request.getServletPath();
+        HttpSession session = request.getSession(false);
+        Form formFromAttribute = (Form) session.getAttribute(AttributeName.FORM);
         User user = getUser(request);
+        if (sessionIsExist(formFromAttribute) && formAlreadyHaveUser(formFromAttribute)) {
+            return notSuccessfulRegisterCase(request);
 
+        }
         if (notCorrectDataUser(user) || checkIsExistUser.isExist(user)) {
 
             return notSuccessfulRegisterCase(request);
@@ -50,13 +53,33 @@ public class RegisterUserCommand implements Command {
         setUserEncryptionPassword(user);
         if (createUser.addedToDbEntity(user)) {
             LOG.info("Register successfully " + user.getName() + " " + user.getSurname());
-            session.setAttribute("user", user);
+            Form form = null;
+            if (sessionIsExist(formFromAttribute)) {
+                form = formFromAttribute;
+                form.setUser(user);
+            } else {
+                form = getNewForm(user);
+            }
+            session.setAttribute(AttributeName.FORM, form);
             request.setAttribute(AttributeName.REGISTER_MESSAGE, SUCCESSFUL);
         }
 
 
-        return new Page(PagePathConstant.UI_PAGES_REGISTER_FORM_JSP);
+        return new Page(PagePathConstant.HOME_URL);
     }
+
+    private Form getNewForm(User user) {
+        return new Form(user);
+    }
+
+    private boolean formAlreadyHaveUser(Form formFromAttribute) {
+        return formFromAttribute.getUser() != null;
+    }
+
+    private boolean sessionIsExist(Form formFromAttribute) {
+        return formFromAttribute != null;
+    }
+
 
     private Page notSuccessfulRegisterCase(HttpServletRequest request) {
         LOG.info("Register unsuccessfully");
@@ -73,12 +96,12 @@ public class RegisterUserCommand implements Command {
     }
 
     private User getUser(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String additionalInfo = request.getParameter("additionalInfo");
+        String name = request.getParameter("name").trim();
+        String surname = request.getParameter("surname").trim();
+        String phone = request.getParameter("phone").trim();
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        String additionalInfo = request.getParameter("additionalInfo").trim();
         UserRole user = UserRole.USER;
 
         return new User(name, surname, email, password, phone, user, additionalInfo);

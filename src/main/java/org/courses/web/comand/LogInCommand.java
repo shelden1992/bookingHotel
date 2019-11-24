@@ -5,8 +5,8 @@ import org.courses.constant.AttributeName;
 import org.courses.constant.PagePathConstant;
 import org.courses.factory.AbstractServiceFactory;
 import org.courses.factory.UserServiceFactory;
+import org.courses.model.Form;
 import org.courses.model.User;
-import org.courses.model.UserRole;
 import org.courses.services.ServiceType;
 import org.courses.services.intefaces.CryptographyService;
 import org.courses.services.intefaces.SelectEntityService;
@@ -15,13 +15,12 @@ import org.courses.web.data.Page;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LogInCommand implements Command {
-    private static final Logger LOG = Logger.getLogger(LogInCommand.class);
     public static final String SUCCESSFUL = "navigation.login.successful";
     public static final String ERROR = "navigation.registerForm.wrongRegister";
+    private static final Logger LOG = Logger.getLogger(LogInCommand.class);
     private ValidDataService correctDataUser;
     private SelectEntityService selectEntityService;
     private CryptographyService cryptographyPassword;
@@ -36,7 +35,10 @@ public class LogInCommand implements Command {
     @Override
     public Page perform(HttpServletRequest request) throws IOException, ServletException {
         User user = getUser(request);
-        HttpSession session = request.getSession();
+        Form formFromAttribute = (Form) request.getSession(false).getAttribute(AttributeName.FORM);
+        if (sessionIsExist(formFromAttribute) && formAlreadyHaveUser(formFromAttribute)) {
+            return notSuccessfulLogInCase(request);
+        }
         if (notCorrectDataUser(user)) {
             return notSuccessfulLogInCase(request);
         }
@@ -45,13 +47,28 @@ public class LogInCommand implements Command {
             return notSuccessfulLogInCase(request);
         }
         if (isSamePassword(user, entityFromDb)) {
-//            new UserDto();
-            session.setAttribute("user", user);
+            Form form = null;
+            user = entityFromDb;
+            if (sessionIsExist(formFromAttribute)) {
+                form = formFromAttribute;
+                form.setUser(entityFromDb);
+            } else {
+                form = getNewForm(user);
+            }
+            request.getSession().setAttribute(AttributeName.FORM, form);
 //            if () check admin?
             return successfulLogInCase(request);
         }
 
         return notSuccessfulLogInCase(request);
+    }
+
+    private boolean formAlreadyHaveUser(Form formFromAttribute) {
+        return formFromAttribute.getUser() != null;
+    }
+
+    private boolean sessionIsExist(Form formFromAttribute) {
+        return formFromAttribute != null;
     }
 
     private Page successfulLogInCase(HttpServletRequest request) {
@@ -71,15 +88,15 @@ public class LogInCommand implements Command {
     }
 
     private User getUser(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String additionalInfo = request.getParameter("additionalInfo");
-        UserRole user = UserRole.USER;
+        String name = request.getParameter("name").trim();
+        String surname = request.getParameter("surname").trim();
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        return new User(name, surname, email, password);
+    }
 
-        return new User(name, surname, password);
+    private Form getNewForm(User user) {
+        return new Form(user);
     }
 
     private boolean notCorrectDataUser(User user) {

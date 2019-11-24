@@ -30,7 +30,7 @@ public class FormDao extends AbstractDao<Form> {
 
     private static final String SELECT_FROM_BY_ID = "SELECT * FROM " + FORM + "WHERE " + USER_ID + " =?;";
     private static final String DELETE = "DELETE FROM " + FORM + "WHERE " + USER_ID + " =?;";
-    private static final String INSERT_INTO = "INSERT INTO" + FORM + "("
+    private static final String INSERT_INTO = "INSERT INTO " + FORM + "("
             + USER_ID + ", "
             + RESERVATION_ID + ", "
             + ADDITIONAL_INFO + ") VALUES(?, ?, ?);";
@@ -47,6 +47,7 @@ public class FormDao extends AbstractDao<Form> {
             + "reserv." + FINISH_RESERVATION + " AND "
             + "r." + PLACE + ">=? AND "
             + "r." + ROOM_TYPE + "=? OR \'" + ROOM_TYPE_ALL + "\' = ?;";
+    public static ReservationDao reservationDao = new ReservationDao();
 
 
     @Override
@@ -65,7 +66,7 @@ public class FormDao extends AbstractDao<Form> {
     }
 
     private Reservation getReservationById(ResultSet resultSet) throws SQLException {
-        return new ReservationDao().getById(resultSet.getInt(RESERVATION_ID));
+        return reservationDao.getById(resultSet.getInt(RESERVATION_ID));
     }
 
     private User getUserById(ResultSet resultSet) throws SQLException {
@@ -81,11 +82,18 @@ public class FormDao extends AbstractDao<Form> {
     @Override
     public boolean create(Form entity) {
         LOG.info("Trying INSERT INTO reservation " + entity);
+        reservationDao.create(entity.getReservation());
+
+
         return createUpdate(INSERT_INTO, ps -> {
             ps.setInt(1, entity.getUser().getEntityId());
-            ps.setInt(2, getReservation(entity).getEntityId());
+            ps.setInt(2, getReservationId(entity));
             ps.setString(3, entity.getAdditionalInfo());
         });
+    }
+
+    private int getReservationId(Form entity) {
+        return reservationDao.getReservationId(entity.getReservation());
     }
 
     @Override

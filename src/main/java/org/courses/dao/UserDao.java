@@ -40,6 +40,8 @@ public class UserDao extends AbstractDao<User> {
     private static final String GET_BY_ID = "SELECT * FROM " + USER + " WHERE " + USER_ID + " =?;";
     private static final String GET_BY_NAME_AND_SURNAME_AND_PHONE = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
             + SURNAME + " =? AND " + PHONE + " =?;";
+    private static final String GET_BY_NAME_AND_SURNAME_AND_EMAIL = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
+            + SURNAME + " =? AND " + EMAIL + " =?;";
 
     private static final String GET_BY_NAME_AND_SURNAME = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
             + SURNAME + " =?;";
@@ -60,19 +62,11 @@ public class UserDao extends AbstractDao<User> {
                 resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet), resultSet.getString(ADDITIONAL_INFO));
     }
 
-    public User getUserByNameSurnameAndPhone(String name, String surname, String phone) {
-        return getEntityWithCondition(GET_BY_NAME_AND_SURNAME_AND_PHONE, ps -> {
-            ps.setString(1, name);
-            ps.setString(2, surname);
-            ps.setString(3, phone);
-
-        }, this::getUser);
-    }
-
-    public User getUserByNameSurnameAndPhone(String name, String surname) {
-        return getEntityWithCondition(GET_BY_NAME_AND_SURNAME, ps -> {
-            ps.setString(1, name);
-            ps.setString(2, surname);
+    public User getUserByNameSurnameAndEmail(User user) {
+        return getEntityWithCondition(GET_BY_NAME_AND_SURNAME_AND_EMAIL, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getSurname());
+            ps.setString(3, user.getEmail());
 
         }, this::getUser);
     }
@@ -125,4 +119,12 @@ public class UserDao extends AbstractDao<User> {
         return Arrays.stream(USER_ROLES).filter(role -> role.getUserRoleName().equals(inTable)).findAny().orElse(null);
     }
 
+    public User getUserByNameSurnameAndPhone(User user) {
+        return getEntityWithCondition(GET_BY_NAME_AND_SURNAME_AND_PHONE, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getSurname());
+            ps.setString(3, user.getPhone());
+
+        }, this::getUser);
+    }
 }

@@ -28,6 +28,11 @@ public class RoomDao extends AbstractDao<Room> {
             + ") VALUES(?,?,?,?);";
     private static final String SELECT_BY_ID = "SELECT * FROM " + ROOM + " WHERE "
             + ROOM_NUMB + " = ?;";
+
+    private static final String SELECT_ID = "SELECT * FROM " + ROOM + " WHERE "
+            + PLACE + " = ? AND "
+            + PRICE + " = ? AND "
+            + TYPE + " =?; ";
     private static final String SELECT_NOT_RESERVED = "SELECT * FROM " + ROOM + " WHERE "
             + IS_RESERVED + " = ?;";
 
@@ -55,6 +60,15 @@ public class RoomDao extends AbstractDao<Room> {
     public Room getById(int id) {
         LOG.info("Trying SELECT room WHERE id = " + id);
         return getEntityWithCondition(SELECT_BY_ID, ps -> ps.setInt(1, id), this::getRoom);
+    }
+
+    public int getId(Room room) {
+        LOG.info("Trying SELECT id ");
+        return getEntityWithCondition(SELECT_ID, ps -> {
+            ps.setInt(1, room.getPlace());
+            ps.setDouble(2, room.getPrice());
+            ps.setString(3, room.getRoomType().getName());
+        }, this::getRoom).getEntityId();
     }
 
     private Room getRoom(ResultSet resultSet) throws SQLException {
