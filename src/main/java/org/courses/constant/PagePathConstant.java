@@ -13,6 +13,5 @@ public class PagePathConstant {
     public static final String UI_PAGES_REGISTER_FORM_JSP = "/ui/register-form.jsp";
     public static final String UI_PAGES_LOGIN_FORM_JSP = "/ui/login-form.jsp";
     public static final String CHECK_AVAILABILTY = "/ui/check-availabilty.jsp";
-
-
+    public static final String BOOKING_FORM = "/ui/booking-form.jsp";
 }

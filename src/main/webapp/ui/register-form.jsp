@@ -68,8 +68,10 @@
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.registerForm.register"/></h2>
-                                                <h5><span class="text-danger"><c:out
-                                                        value="${statusRegisterMessage}"/></span></h5>
+                                                <c:if test="${statusLoginMessage!=null}">
+                                                    <h5><span class="text-danger"><fmt:message
+                                                            key="${statusRegisterMessage}"/></span></h5>
+                                                </c:if>
                                             </div>
                                         </div>
                                         <div class="row">

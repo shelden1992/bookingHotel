@@ -1,10 +1,16 @@
 package org.courses.model;
 
+import java.util.StringJoiner;
+
 public class Form extends Entity  {
 
     private User user;
     private Reservation reservation;
     private String additionalInfo;
+
+    public Form(Reservation reservation) {
+        this.reservation = reservation;
+    }
 
     public Form(int id, User user, Reservation reservation, String additionalInfo) {
         this.id = id;
@@ -29,6 +35,16 @@ public class Form extends Entity  {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Form.class.getSimpleName() + "[", "]")
+                .add("user=" + user)
+                .add("reservation=" + reservation)
+                .add("additionalInfo='" + additionalInfo + "'")
+                .add("id=" + id)
+                .toString();
+    }
+
     public User getUser() {
         return user;
     }
@@ -41,7 +57,13 @@ public class Form extends Entity  {
         return reservation;
     }
 
+    public Form(User user, Reservation reservation) {
+        this.user = user;
+        this.reservation = reservation;
+    }
+
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
+
 }

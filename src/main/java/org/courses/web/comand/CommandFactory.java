@@ -26,8 +26,8 @@ public class CommandFactory {
         getCommandMap.put("/gallery", new GalleryCommand());
         getCommandMap.put("/register-form", new OpenRegisterFormCommand());
         getCommandMap.put("/login-form", new OpenLoginFormCommand());
+        getCommandMap.put("/booking-form", new BookingCommand());
         getCommandMap.put("/logOut", new LogOutCommand());
-//        getCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
 
 
         postCommandMap.put("/", new HomeCommand());

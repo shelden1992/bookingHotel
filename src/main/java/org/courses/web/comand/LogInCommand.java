@@ -1,6 +1,7 @@
 package org.courses.web.comand;
 
 import org.apache.log4j.Logger;
+import org.courses.constant.AttributeName;
 import org.courses.constant.PagePathConstant;
 import org.courses.factory.AbstractServiceFactory;
 import org.courses.factory.UserServiceFactory;
@@ -19,7 +20,8 @@ import java.io.IOException;
 
 public class LogInCommand implements Command {
     private static final Logger LOG = Logger.getLogger(LogInCommand.class);
-    private static final String LOGIN_MESSAGE = "statusLoginMessage";
+    public static final String SUCCESSFUL = "navigation.login.successful";
+    public static final String ERROR = "navigation.registerForm.wrongRegister";
     private ValidDataService correctDataUser;
     private SelectEntityService selectEntityService;
     private CryptographyService cryptographyPassword;
@@ -43,7 +45,9 @@ public class LogInCommand implements Command {
             return notSuccessfulLogInCase(request);
         }
         if (isSamePassword(user, entityFromDb)) {
+//            new UserDto();
             session.setAttribute("user", user);
+//            if () check admin?
             return successfulLogInCase(request);
         }
 
@@ -52,7 +56,7 @@ public class LogInCommand implements Command {
 
     private Page successfulLogInCase(HttpServletRequest request) {
         LOG.info("LogIn successfully");
-        request.setAttribute(LOGIN_MESSAGE, "Login successful");
+        request.setAttribute(AttributeName.LOGIN_MESSAGE, SUCCESSFUL);
 
         return new Page(PagePathConstant.HOME_URL, true);
     }
@@ -62,7 +66,7 @@ public class LogInCommand implements Command {
     }
 
     private Page notSuccessfulLogInCase(HttpServletRequest request) {
-        request.setAttribute(LOGIN_MESSAGE, "Something wrong. Please, try again.");
+        request.setAttribute(AttributeName.LOGIN_MESSAGE, ERROR);
         return new Page(PagePathConstant.UI_LOGIN_JSP);
     }
 

@@ -1,6 +1,7 @@
 package org.courses.web.comand;
 
 import org.apache.log4j.Logger;
+import org.courses.constant.AttributeName;
 import org.courses.constant.PagePathConstant;
 import org.courses.factory.AbstractServiceFactory;
 import org.courses.factory.UserServiceFactory;
@@ -20,7 +21,9 @@ import java.io.IOException;
 
 public class RegisterUserCommand implements Command {
     private static final Logger LOG = Logger.getLogger(RegisterUserCommand.class);
-    private static final String REGISTER_MESSAGE = "statusRegisterMessage";
+    public static final String SUCCESSFUL = "navigation.registerForm.successful";
+    public static final String ERROR = "navigation.registerForm.wrongRegister";
+
     private CreateEntityService createUser;
     private ValidDataService correctDataUser;
     private CheckExistService checkIsExistUser;
@@ -48,7 +51,7 @@ public class RegisterUserCommand implements Command {
         if (createUser.addedToDbEntity(user)) {
             LOG.info("Register successfully " + user.getName() + " " + user.getSurname());
             session.setAttribute("user", user);
-            request.setAttribute(REGISTER_MESSAGE, "Register successfully");
+            request.setAttribute(AttributeName.REGISTER_MESSAGE, SUCCESSFUL);
         }
 
 
@@ -57,7 +60,7 @@ public class RegisterUserCommand implements Command {
 
     private Page notSuccessfulRegisterCase(HttpServletRequest request) {
         LOG.info("Register unsuccessfully");
-        request.setAttribute(REGISTER_MESSAGE, "Something wrong. Please, try again.");
+        request.setAttribute(AttributeName.REGISTER_MESSAGE, ERROR);
         return new Page(PagePathConstant.UI_PAGES_REGISTER_FORM_JSP);
     }
 

@@ -1,7 +1,8 @@
 package org.courses.services.intefaces;
 
-import org.courses.dto.ReservationDto;
-
 public interface DateProcessingService extends Service {
-    void setPrepareDateToReservationDto(ReservationDto checkinDate);
+    java.sql.Date getValidDateCheckOut(String notParseDateCheckOut, java.sql.Date validDateCheckIn);
+
+    java.sql.Date getValidDateCheckIn(String notParseDateCheckIn);
+
 }

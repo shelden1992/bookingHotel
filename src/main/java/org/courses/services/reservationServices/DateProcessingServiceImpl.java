@@ -1,11 +1,11 @@
 package org.courses.services.reservationServices;
 
 import org.apache.log4j.Logger;
-import org.courses.dto.ReservationDto;
 import org.courses.services.intefaces.DateProcessingService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -15,15 +15,6 @@ public class DateProcessingServiceImpl implements DateProcessingService {
     private SimpleDateFormat sdf1 = new SimpleDateFormat("dd MMMM, yyyy", Locale.US);
     private SimpleDateFormat sdfForDb = new SimpleDateFormat("yyyy-MM-dd");
     private java.util.Date LOCAL_DATE = new java.util.Date();
-
-    public void setPrepareDateToReservationDto(ReservationDto reservation) {
-        String startReservationBeforeParse = reservation.getStartReservationBeforeParse();
-        String finishReservationBeforeParse = reservation.getFinishReservationBeforeParse();
-        java.sql.Date validDateCheckIn = getValidDateCheckIn(startReservationBeforeParse);
-        java.sql.Date validDateCheckOut = getValidDateCheckOut(finishReservationBeforeParse, validDateCheckIn);
-        reservation.setStartReservation(validDateCheckIn);
-        reservation.setFinishReservation(validDateCheckOut);
-    }
 
     private java.sql.Date parseToSqlDte(String stringDate) {
         if (stringDate == null || stringDate.isEmpty()) {
@@ -40,19 +31,35 @@ public class DateProcessingServiceImpl implements DateProcessingService {
         return date;
     }
 
-    private java.sql.Date getValidDateCheckOut(String notParseDateCheckOut, java.sql.Date validDateCheckIn) {
-        java.sql.Date validDateCheckOut = new java.sql.Date(LOCAL_DATE.getTime());
-        if (!notParseDateCheckOut.isEmpty()) {
+    public java.sql.Date getValidDateCheckOut(String notParseDateCheckOut, java.sql.Date validDateCheckIn) {
+        Date localTimePlusDay = addOneDay(validDateCheckIn).getTime();
+        java.sql.Date validDate = new java.sql.Date(localTimePlusDay.getTime());
+        if (dateNotEmpty(notParseDateCheckOut)) {
             java.sql.Date parseDateCheckOut = parseToSqlDte(notParseDateCheckOut);
-            if (parseDateCheckOut.after(validDateCheckIn)) {
-                validDateCheckOut = parseDateCheckOut;
+            if (dateCheckOutAfterCheckIn(validDateCheckIn, parseDateCheckOut)) {
+                validDate = parseDateCheckOut;
             }
         }
-        return validDateCheckOut;
+        return validDate;
+    }
+
+    private boolean dateCheckOutAfterCheckIn(java.sql.Date validDateCheckIn, java.sql.Date parseDateCheckOut) {
+        return parseDateCheckOut.after(validDateCheckIn);
+    }
+
+    private boolean dateNotEmpty(String notParseDateCheckOut) {
+        return !notParseDateCheckOut.isEmpty();
+    }
+
+    private Calendar addOneDay(Date validDateCheckOut) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(validDateCheckOut);
+        cal.add(Calendar.DATE, 1);
+        return cal;
     }
 
 
-    private java.sql.Date getValidDateCheckIn(String notParseDateCheckIn) {
+    public java.sql.Date getValidDateCheckIn(String notParseDateCheckIn) {
         java.sql.Date validDateCheckIn = new java.sql.Date(LOCAL_DATE.getTime());
         if (!notParseDateCheckIn.isEmpty()) {
             java.sql.Date parseDateCheckIn = parseToSqlDte(notParseDateCheckIn);

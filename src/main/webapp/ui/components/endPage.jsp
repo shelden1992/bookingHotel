@@ -4,7 +4,7 @@
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
 
-<section class="section bg-image overlay" style="background-image: url('/static/images/hero_4.jpg');">
+<section class="section bg-image overlay" style="background-image: url('${pageContext.request.contextPath}/ui/images/hero_4.jpg');">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left" data-aos="fade-up">
@@ -67,13 +67,6 @@
                 <!--  -->
             </p>
 
-            <p class="col-md-4 text-right social">
-                <a href="#"><span class="fa fa-tripadvisor"></span></a>
-                <a href="#"><span class="fa fa-facebook"></span></a>
-                <a href="#"><span class="fa fa-twitter"></span></a>
-                <a href="#"><span class="fa fa-linkedin"></span></a>
-                <a href="#"><span class="fa fa-vimeo"></span></a>
-            </p>
         </div>
     </div>
 </footer>

@@ -10,6 +10,11 @@ public class Room extends Entity {
     private RoomType roomType;
     private List<Photo> photoList;
 
+    public Room(int place, RoomType roomType) {
+        this.place = place;
+        this.roomType = roomType;
+    }
+
     public Room(int id, boolean reserved, int place, double price, RoomType roomType, List<Photo> photoList) {
         this.id = id;
         this.reserved = reserved;

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
+<c:set var="existFreeRooms" value="${requestScope.existFreeRooms}"/>
 <html>
 <head>
     <base href="${pageContext.request.contextPath}/ui/">
@@ -59,7 +60,8 @@
                 <form action="${pageContext.request.contextPath}/check-availabilty" method="post">
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkin_date" name="checkin_date" class="font-weight-bold text-black"><fmt:message
+                            <label for="checkin_date" name="checkin_date"
+                                   class="font-weight-bold text-black"><fmt:message
                                     key="navigation.bookingForm.dataCheckIn"/> </label>
                             <div class="field-icon-wrap">
                                 <div class="icon"><span class="icon-calendar"></span></div>
@@ -67,7 +69,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                            <label for="checkout_date"  class="font-weight-bold text-black"><fmt:message
+                            <label for="checkout_date" class="font-weight-bold text-black"><fmt:message
                                     key="navigation.bookingForm.dataCheckOut"/> </label>
                             <div class="field-icon-wrap">
                                 <div class="icon"><span class="icon-calendar"></span></div>
@@ -90,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="roomType" class="font-weight-bold text-black" ><fmt:message
+                                    <label for="roomType" class="font-weight-bold text-black"><fmt:message
                                             key="navigation.bookingForm.roomType"/></label>
                                     <div class="field-icon-wrap" onclick="">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -118,6 +120,10 @@
                             <button class="btn btn-primary btn-block text-white"><fmt:message
                                     key="navigation.bookingForm.checkAvailabilty"/></button>
                         </div>
+                        <c:if test="${existFreeRooms!=null}">
+                            <a style="color: red;font-size: large;"> <fmt:message
+                                    key="${existFreeRooms}"/></a>
+                        </c:if>
                     </div>
                 </form>
             </div>

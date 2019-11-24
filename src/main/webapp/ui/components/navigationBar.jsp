@@ -93,72 +93,99 @@
                 <div class="row">
                     <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
 
-                        <form action="${pageContext.request.contextPath}/booking" method="post" class="bg-white p-4">
+                        <form action="${pageContext.request.contextPath}/check-availabilty" method="post"
+                              class="bg-white p-4">
                             <div class="row mb-4">
                                 <div class="col-12"><h2><fmt:message
                                         key="navigation.bookingForm.booking"/></h2></div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="nameForBooking"><fmt:message
-                                            key="navigation.bookingForm.name"/></label>
-                                    <input type="text" id="nameForBooking" class="form-control ">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label class="text-black font-weight-bold" for="phoneForBooking"><fmt:message
-                                            key="navigation.bookingForm.phone"/></label>
-                                    <input type="text" id="phoneForBooking" class="form-control ">
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="emailForBooking">Email</label>
-                                    <input type="email" id="emailForBooking" class="form-control ">
-                                </div>
-                            </div>
+
+
+
+                            <%--<c:if test="${sessionScope.user != null}">--%>
+                            <%--                            <div class="row">--%>
+                            <%--                                <div class="col-md-6 form-group">--%>
+                            <%--                                    <label class="text-black font-weight-bold" for="nameForBooking"><fmt:message--%>
+                            <%--                                            key="navigation.bookingForm.name"/></label>--%>
+                            <%--                                    <input type="text" id="nameForBooking" class="form-control ">--%>
+                            <%--                                </div>--%>
+                            <%--                                <div class="col-md-6 form-group">--%>
+                            <%--                                    <label class="text-black font-weight-bold" for="phoneForBooking"><fmt:message--%>
+                            <%--                                            key="navigation.bookingForm.phone"/></label>--%>
+                            <%--                                    <input type="text" id="phoneForBooking" class="form-control ">--%>
+                            <%--                                </div>--%>
+                            <%--                            </div>--%>
+
+                            <%--                            <div class="row">--%>
+                            <%--                                <div class="col-md-12 form-group">--%>
+                            <%--                                    <label class="text-black font-weight-bold" for="emailForBooking">Email</label>--%>
+                            <%--                                    <input type="email" id="emailForBooking" class="form-control ">--%>
+                            <%--                                </div>--%>
+                            <%--                            </div>--%>
 
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="checkin_date"><fmt:message
                                             key="navigation.bookingForm.dataCheckIn"/></label>
-                                    <input type="text" id="checkin_date" class="form-control">
+                                    <input type="text" id="checkin_date" name="checkin-date" class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="checkout_date"><fmt:message
                                             key="navigation.bookingForm.dataCheckOut"/></label>
-                                    <input type="text" id="checkout_date" class="form-control">
+                                    <input type="text" id="checkout_date" name="checkout-date" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-6 mb-3 mb-md-0">
                                     <label for="adults" class="font-weight-bold text-black"><fmt:message
                                             key="navigation.bookingForm.adults"/></label>
                                     <div class="field-icon-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="adults" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                            <option value="">3</option>
-                                            <option value="">4+</option>
+                                        <select name="adults" id="adults" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4+</option>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="roomType" class="font-weight-bold text-black"><fmt:message
+                                            key="navigation.bookingForm.roomType"/></label>
+                                    <div class="field-icon-wrap" onclick="">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="roomType" id="roomType" class="form-control">
+                                            <option value="ALL" name="ALL"><fmt:message
+                                                    key="selectionRooms.header.all"/></option>
+                                            <option value="COMFORT"><fmt:message
+                                                    key="selectionRooms.header.roomTypeComfort"/></option>
+                                            <option value="FAMILY REST" name="FAMILY REST"><fmt:message
+                                                    key="selectionRooms.header.roomTypeFamilyRest"/></option>
+                                            <option value="RELAX"><fmt:message
+                                                    key="selectionRooms.header.roomTypeRelax"/></option>
+                                            <option value="BUSINESS"><fmt:message
+                                                    key="selectionRooms.header.roomTypeBusiness"/></option>
+                                            <option value="LUX"><fmt:message
+                                                    key="selectionRooms.header.roomTypeLux"/></option>
 
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="message"><fmt:message
-                                            key="navigation.bookingForm.notes"/></label>
-                                    <textarea name="message" id="message" class="form-control " cols="30"
-                                              rows="8"></textarea>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <%--                            <div class="row mb-4">--%>
+                            <%--                                <div class="col-md-12 form-group">--%>
+                            <%--                                    <label class="text-black font-weight-bold" for="message"><fmt:message--%>
+                            <%--                                            key="navigation.bookingForm.notes"/></label>--%>
+                            <%--                                    <textarea name="message" id="message" class="form-control " cols="30"--%>
+                            <%--                                              rows="8"></textarea>--%>
+                            <%--                                </div>--%>
+                            <%--                            </div>--%>
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="submit" value="<fmt:message
-            key="navigation.bookingForm.bookingNow"/>"
+        key="navigation.bookingForm.checkAvailabilty"/>"
                                            class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                                 </div>
                             </div>

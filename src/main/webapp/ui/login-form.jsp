@@ -10,7 +10,7 @@
     <base href="${pageContext.request.contextPath}/ui/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Booking hotel room</title>
+    <title>LogIn form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css"
@@ -73,15 +73,20 @@
                                         <div class="row mb-4">
                                             <div class="col-12"><h2><fmt:message
                                                     key="navigation.registerForm.signIn"/></h2>
-                                                <h5><span class="text-danger"><c:out
-                                                        value="${statusLoginMessage}"/></span></h5>
+                                                <c:if test="${statusLoginMessage!=null}">
+                                                    <h5><span class="text-danger">
+                                                    <fmt:message
+                                                            key="${statusLoginMessage}"/></span></h5>
+                                                </c:if>
+
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 form-group">
                                                 <label class="text-black font-weight-bold" for="nameLogin"><fmt:message
                                                         key="navigation.registerForm.name"/></label>
-                                                <input type="text" id="nameLogin" class="form-control " name="name" required="required">
+                                                <input type="text" id="nameLogin" class="form-control " name="name"
+                                                       required="required">
                                             </div>
 
                                             <div class="col-md-6 form-group">
@@ -96,7 +101,8 @@
                                                        for="passwordLogin"><fmt:message
                                                         key="navigation.registerForm.password"/></label>
                                                 <input type="password" id="passwordLogin" class="form-control "
-                                                       name="password" pattern=".{6,}" title="Six or more characters" required="required">
+                                                       name="password" pattern=".{6,}" title="Six or more characters"
+                                                       required="required">
                                             </div>
                                             <div class="row">
                                                 <div class="d-flex justify-content-between align-content-end w-100 col-auto">

@@ -1,7 +1,6 @@
 package org.courses.dao;
 
 import org.apache.log4j.Logger;
-import org.courses.dto.ReservationDto;
 import org.courses.model.Reservation;
 import org.courses.model.Room;
 
@@ -121,17 +120,6 @@ public class ReservationDao extends AbstractDao<Reservation> {
                 this::getReservation);
     }
 
-    public List<Reservation> findFreeRoomsBetweenDateByRoomTypeAndAdults(ReservationDto entity) {
-        LOG.info("Trying SELECT all reservation all not reserved rooms between date " + entity.getStartReservation() + " and " + entity.getFinishReservation());
-        return getListEntityWithCondition(SELECT_FREE_ROOM_BETWEEN_DATE_AND_SOME_ROOM_TYPE_AND_PLACE, ps -> {
-                    ps.setDate(1, entity.getStartReservation());
-                    ps.setDate(2, entity.getFinishReservation());
-                    ps.setInt(3, entity.getAdults());
-                    ps.setString(4, entity.getRoomType().getName());
-                    ps.setString(5, entity.getRoomType().getName());
-                },
-                this::getReservation);
-    }
 
     public List<Reservation> findAllReservationsRoomById(int roomNumb) {
         LOG.info("Trying SELECT all reservation by room numb " + roomNumb);

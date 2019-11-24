@@ -9,6 +9,11 @@ public class Reservation extends Entity  {
     private Date finishReservation;
 
 
+    public Reservation(Date startReservation, Date finishReservation) {
+        this.startReservation = startReservation;
+        this.finishReservation = finishReservation;
+    }
+
     public Reservation(Room room, Date startReservation, Date finishReservation) {
         this.room = room;
         this.startReservation = startReservation;
