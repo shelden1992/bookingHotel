@@ -2,7 +2,7 @@ package org.courses.dao;
 
 
 import org.apache.log4j.Logger;
-import org.courses.connect.DataSourceFactory;
+import org.courses.connect.DataSourceConnectionPool;
 import org.courses.dao.mapper.EntityMapper;
 import org.courses.dao.mapper.StatementMapper;
 
@@ -17,7 +17,7 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
 
     protected List<T> getAll(String query, EntityMapper<T> entityMapper) {
         List<T> entityList = new ArrayList<>();
-        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
+        try (PreparedStatement preparedStatement = DataSourceConnectionPool.getPreparedStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 entityList.add(entityMapper.map(resultSet));
@@ -30,7 +30,7 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
 
     protected boolean createUpdate(String query, StatementMapper<T> statementMapper) {
         int i = 0;
-        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
+        try (PreparedStatement preparedStatement = DataSourceConnectionPool.getPreparedStatement(query)) {
             statementMapper.map(preparedStatement);
             i = preparedStatement.executeUpdate();
 
@@ -42,7 +42,7 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
 
     protected T getEntityWithCondition(String query, StatementMapper<T> statementMapper, EntityMapper<T> mapper) {
         T getEntity = null;
-        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
+        try (PreparedStatement preparedStatement = DataSourceConnectionPool.getPreparedStatement(query)) {
             statementMapper.map(preparedStatement);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -58,7 +58,7 @@ public abstract class AbstractDao<T> implements EntityDao<T> {
 
     protected List<T> getListEntityWithCondition(String query, StatementMapper<T> statementMapper, EntityMapper<T> mapper) {
         List<T> listEntity = new ArrayList<>();
-        try (PreparedStatement preparedStatement = DataSourceFactory.getPreparedStatement(query)) {
+        try (PreparedStatement preparedStatement = DataSourceConnectionPool.getPreparedStatement(query)) {
             statementMapper.map(preparedStatement);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
