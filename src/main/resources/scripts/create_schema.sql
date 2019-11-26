@@ -35,13 +35,16 @@ create table room_type
 );
 create table room
 (
-    room_numb   int                                                         not null
+    room_numb int                                                         not null
         primary key,
-    is_reserved tinyint default 0                                           not null,
-    place       int     default 2                                           null,
-    price       double                                                      not null,
-    type        enum ('RELAX', 'BUSINESS', 'FAMILY REST', 'LUX', 'COMFORT') not null
+    place     int default 2                                               null,
+    price     double                                                      not null,
+    type      enum ('RELAX', 'BUSINESS', 'FAMILY REST', 'LUX', 'COMFORT') not null
 );
+
+create index room_room_type_type_id_fk
+    on room (type);
+
 
 create table photo_room
 (
