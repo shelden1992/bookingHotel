@@ -1,4 +1,4 @@
-CREATE SCHEMA bookingHotel CHARACTER SET utf8 collate utf8_general_ci;
+CREATE SCHEMA booking_hotel CHARACTER SET utf8 collate utf8_general_ci;
 USE booking_hotel;
 
 create table user_role
@@ -35,13 +35,16 @@ create table room_type
 );
 create table room
 (
-    room_numb   int                                                         not null
+    room_numb int                                                         not null
         primary key,
-    is_reserved tinyint default 0                                           not null,
-    place       int     default 2                                           null,
-    price       double                                                      not null,
-    type        enum ('RELAX', 'BUSINESS', 'FAMILY REST', 'LUX', 'COMFORT') not null
+    place     int default 2                                               null,
+    price     double                                                      not null,
+    type      enum ('RELAX', 'BUSINESS', 'FAMILY REST', 'LUX', 'COMFORT') not null
 );
+
+create index room_room_type_type_id_fk
+    on room (type);
+
 
 create table photo_room
 (
@@ -67,28 +70,14 @@ create table reservation
 
 create table form
 (
-    form_id         int auto_increment
+    form_id        int auto_increment
         primary key,
-    user_id         int  not null,
-    reservation_id  int  not null,
-    additional_info text null,
+    user_id        int not null,
+    reservation_id int not null,
     constraint form_user_reservation_id_fk
         foreign key (reservation_id) references reservation (reservation_id),
     constraint form_user_user_id_fk
         foreign key (user_id) references user (user_id)
 );
 
-# create table user_assessment_room
-# (
-#     user_id    int    not null,
-#     room_numb  int    not null,
-#     assessment double null,
-#     primary key (user_id, room_numb),
-#     constraint user_assessment_room_pk
-#         unique (room_numb),
-#     constraint user_assessment_room_room_room_numb_fk
-#         foreign key (room_numb) references room (room_numb),
-#     constraint user_assessment_room_user_user_id_fk
-#         foreign key (user_id) references user (user_id)
-# );
 

@@ -1,19 +1,33 @@
 package org.courses.model;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 public class Room extends Entity {
-    private boolean reserved;
     private int place;
     private double price;
     private RoomType roomType;
+    private List<Photo> photoList;
 
-    public Room(int id, boolean reserved, int place, double price, RoomType roomType) {
+    public Room(int place, RoomType roomType) {
+        this.place = place;
+        this.roomType = roomType;
+    }
+
+    public Room(int id,   int place, double price, RoomType roomType, List<Photo> photoList) {
         this.id = id;
-        this.reserved = reserved;
         this.place = place;
         this.price = price;
         this.roomType = roomType;
+        this.photoList = photoList;
+    }
+
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 
     public double getPrice() {
@@ -28,7 +42,6 @@ public class Room extends Entity {
     public String toString() {
         return new StringJoiner(", ", Room.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
-                .add("reserved=" + reserved)
                 .add("place=" + place)
                 .add("price=" + price)
                 .add("roomType=" + roomType)
@@ -51,13 +64,6 @@ public class Room extends Entity {
         this.id = id;
     }
 
-    public boolean isReserved() {
-        return reserved;
-    }
-
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
-    }
 
     public int getPlace() {
         return place;

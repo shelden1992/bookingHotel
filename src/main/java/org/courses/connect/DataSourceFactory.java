@@ -58,7 +58,7 @@ public class DataSourceFactory {
         try {
             preparedStatement = getConnection().prepareStatement(query);
         } catch (SQLException e) {
-            LOG.error("Exception while created PreparedStatement", e);
+            LOG.error("Exception while addedToDbEntity PreparedStatement", e);
         }
         return preparedStatement;
 

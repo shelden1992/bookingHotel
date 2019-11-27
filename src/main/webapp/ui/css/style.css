@@ -526,8 +526,7 @@ textarea.form-control {
 .owl-custom-nav {
   float: right;
   position: relative;
-  z-index: 10;
-}
+  z-index: 10; }
   .owl-custom-nav .owl-custom-prev,
   .owl-custom-nav .owl-custom-next {
     padding: 10px;

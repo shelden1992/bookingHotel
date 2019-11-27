@@ -23,10 +23,10 @@ public class UserDao extends AbstractDao<User> {
     private static final String USER_ROLE = "user_role";
     private static final String ADDITIONAL_INFO = "additional_info";
     private static final String SELECT_FROM = "SELECT * FROM " + USER;
-    private static final String INSERT_INTO = "INSERT INTO " + USER + "(" + NAME + ", " + SURNAME + ", " + EMAIL + ", "
+    private static final String INSERT_INTO = "INSERT INTO " + USER
+            + "(" + NAME + ", " + SURNAME + ", " + EMAIL + ", "
             + PASSWORD + ", " + PHONE + ", " + USER_ROLE + ", " + ADDITIONAL_INFO + ")" +
             "VALUES ( ?, ?, ?, ?, ?,?,?);";
-
     private static final String DELETE_USER = "DELETE FROM " + USER + " WHERE " + USER_ID + "= ?;";
     private static final String UPDATE_USER_BY_ID = "UPDATE " + USER + " SET "
             + NAME + "= ?, "
@@ -38,8 +38,13 @@ public class UserDao extends AbstractDao<User> {
             + ADDITIONAL_INFO + "= ? " +
             "WHERE " + USER_ID + " = ?;";
     private static final String GET_BY_ID = "SELECT * FROM " + USER + " WHERE " + USER_ID + " =?;";
-    private static final String GET_BY_NAME_SUNAME_PHONE = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
+    private static final String GET_BY_NAME_AND_SURNAME_AND_PHONE = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
             + SURNAME + " =? AND " + PHONE + " =?;";
+    private static final String GET_BY_NAME_AND_SURNAME_AND_EMAIL = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
+            + SURNAME + " =? AND " + EMAIL + " =?;";
+
+    private static final String GET_BY_NAME_AND_SURNAME = "SELECT * FROM " + USER + " WHERE " + NAME + " =? AND "
+            + SURNAME + " =?;";
 
     @Override
     public List<User> getAll() {
@@ -57,11 +62,11 @@ public class UserDao extends AbstractDao<User> {
                 resultSet.getString(PASSWORD), resultSet.getString(PHONE), getUserRole(resultSet), resultSet.getString(ADDITIONAL_INFO));
     }
 
-    public User getUserByNameSurnameAndPhone(String name, String surname, String phone) {
-        return getEntityWithCondition(GET_BY_NAME_SUNAME_PHONE, ps -> {
-            ps.setString(1, name);
-            ps.setString(2, surname);
-            ps.setString(3, phone);
+    public User getUserByNameSurnameAndEmail(User user) {
+        return getEntityWithCondition(GET_BY_NAME_AND_SURNAME_AND_EMAIL, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getSurname());
+            ps.setString(3, user.getEmail());
 
         }, this::getUser);
     }
@@ -114,4 +119,12 @@ public class UserDao extends AbstractDao<User> {
         return Arrays.stream(USER_ROLES).filter(role -> role.getUserRoleName().equals(inTable)).findAny().orElse(null);
     }
 
+    public User getUserByNameSurnameAndPhone(User user) {
+        return getEntityWithCondition(GET_BY_NAME_AND_SURNAME_AND_PHONE, ps -> {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getSurname());
+            ps.setString(3, user.getPhone());
+
+        }, this::getUser);
+    }
 }

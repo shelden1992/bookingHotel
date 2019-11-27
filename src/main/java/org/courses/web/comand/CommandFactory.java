@@ -17,18 +17,23 @@ public class CommandFactory {
     static {
         getCommandMap.put("/404", defaultCommand);
         getCommandMap.put("/", new HomeCommand());
-        getCommandMap.put("/user", new UserCommand());
         getCommandMap.put("/selection-rooms", new RoomsCommand());
         getCommandMap.put("/privacy", new PrivacyPolicyCommand());
         getCommandMap.put("/event", new EventCommand());
         getCommandMap.put("/team", new TeamCommand());
         getCommandMap.put("/language", new LanguageCommand());
         getCommandMap.put("/gallery", new GalleryCommand());
+        getCommandMap.put("/register-form", new OpenRegisterFormCommand());
+        getCommandMap.put("/login-form", new OpenLoginFormCommand());
+        getCommandMap.put("/booking-form", new BookingCommand());
+        getCommandMap.put("/logOut", new LogOutCommand());
 
 
         postCommandMap.put("/", new HomeCommand());
-        postCommandMap.put("/login", new LoginCommand());
+        postCommandMap.put("/logIn", new LogInCommand());
         postCommandMap.put("/register", new RegisterUserCommand());
+        postCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
+        postCommandMap.put("/booking-confirm", new BookingConfirmCommand());
     }
 
     public static Command getCommand(String path, String method) {
