@@ -1,10 +1,8 @@
 package org.courses.connect;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.log4j.Logger;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,24 +11,32 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import static java.util.Objects.nonNull;
+import static org.courses.constant.AppConstans.*;
 
-public class DataSourceConnectionPool {
-    private static final Logger LOG = Logger.getLogger(DataSourceConnectionPool.class);
+public class DataSourceFactory {
+    private static final Logger LOG = Logger.getLogger(DataSourceFactory.class);
+    private static final DataSourceFactory INSTANCE = new DataSourceFactory();
     private static DataSource dataSource;
 
     static {
         Properties properties = new Properties();
         try {
-            Context initContext = new InitialContext();
-            dataSource = (DataSource) initContext.lookup("java:/comp/env/jdbc/booking_hotel");
-//
+            properties.load(DataSourceFactory.class.getResourceAsStream(CONNECT_PROPERTIES));
+            MysqlDataSource mysqlDataSource = new MysqlDataSource();
+            mysqlDataSource.setPassword(properties.getProperty(DB_PASSWORD));
+            mysqlDataSource.setUser(properties.getProperty(DB_USERNAME));
+            mysqlDataSource.setUrl(properties.getProperty(DB_URL));
+            mysqlDataSource.setCharacterEncoding(properties.getProperty(DB_CHARACTER_ENCODING));
+            dataSource = mysqlDataSource;
 
-        } catch (NamingException e) {
-            LOG.error("Exception with JNDI ", e);
+        } catch (IOException e) {
+            LOG.error("Properties not load ", e);
+        } catch (SQLException e) {
+            LOG.error("Exception while set charset enconding", e);
         }
     }
 
-    private DataSourceConnectionPool() {
+    private DataSourceFactory() {
     }
 
     public static Connection getConnection() {
