@@ -70,8 +70,10 @@ public class CheckAvailabiltyCommand implements Command {
     private List<Room> getRoomList(Reservation reservation) {
         List<Reservation> allForms = new ArrayList<>();
         if ("ALL".equals(reservation.getRoom().getRoomType().getName())) {
+            LOG.info("Select ALL free room ");
             allForms = (List<Reservation>) reservationSelectService.getAllRoomsByPlace(reservation);
         } else {
+            LOG.info(String.format("Select %s TYPE free room", reservation.getRoom().getRoomType()));
             allForms = (List<Reservation>) reservationSelectService.getAllEntity(reservation);
         }
 

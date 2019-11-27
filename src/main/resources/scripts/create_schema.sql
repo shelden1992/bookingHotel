@@ -70,16 +70,17 @@ create table reservation
 
 create table form
 (
-    form_id         int auto_increment
+    form_id        int auto_increment
         primary key,
-    user_id         int  not null,
-    reservation_id  int  not null,
-    additional_info text null,
+    user_id        int not null,
+    reservation_id int not null,
     constraint form_user_reservation_id_fk
         foreign key (reservation_id) references reservation (reservation_id),
     constraint form_user_user_id_fk
         foreign key (user_id) references user (user_id)
 );
+
+
 
 # create table user_assessment_room
 # (

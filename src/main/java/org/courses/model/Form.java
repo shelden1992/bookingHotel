@@ -6,39 +6,37 @@ public class Form extends Entity {
 
     private User user;
     private Reservation reservation;
-    private String additionalInfo;
     private double total;
+
 
     public Form() {
     }
 
-    public Form(User user, Reservation reservation, String additionalInfo, double total) {
+    public Form(int id, User user, Reservation reservation, double total) {
+        this.id = id;
         this.user = user;
         this.reservation = reservation;
-        this.additionalInfo = additionalInfo;
         this.total = total;
     }
 
-    public Form(User user, Reservation reservation, double total) {
-        this.user = user;
-        this.reservation = reservation;
-        this.total = total;
-    }
 
     public Form(Reservation reservation) {
         this.reservation = reservation;
     }
 
-    public Form(int id, User user, Reservation reservation, String additionalInfo) {
+    public Form(int id, User user, Reservation reservation) {
         this.id = id;
         this.user = user;
         this.reservation = reservation;
-        this.additionalInfo = additionalInfo;
     }
 
     public Form(User user, Reservation reservation) {
         this.user = user;
         this.reservation = reservation;
+    }
+
+    public Form(User user) {
+        this.user = user;
     }
 
     public double getTotal() {
@@ -47,14 +45,6 @@ public class Form extends Entity {
 
     public void setTotal(double total) {
         this.total = total;
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
     }
 
     public int getEntityId() {
@@ -70,17 +60,12 @@ public class Form extends Entity {
         return new StringJoiner(", ", Form.class.getSimpleName() + "[", "]")
                 .add("user=" + user)
                 .add("reservation=" + reservation)
-                .add("additionalInfo='" + additionalInfo + "'")
                 .add("id=" + id)
                 .toString();
     }
 
     public User getUser() {
         return user;
-    }
-
-    public Form(User user) {
-        this.user = user;
     }
 
     public void setUser(User user) {

@@ -36,6 +36,7 @@ public class PhotoRoomDao extends AbstractDao<Photo> {
     }
 
     public List<Photo> getAllPhotosRoom(int idRoom) {
+        LOG.info("Trying SELECT all room photos WHERE id = " + idRoom);
         return getListEntityWithCondition(SELECT_ALL_PHOTO_BY_ROOM_ID, ps -> ps.setInt(1, idRoom), this::getPhoto);
     }
 

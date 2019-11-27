@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource name="jdbc/booking_hotel"
+              global="jdbc/booking_hotel"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/booking_hotel"
+              username="root"
+              password="12345678"
+
+              maxActive="1000"
+              maxIdle="20"
+              minIdle="5"
+              maxWait="10000"/>
+</Context>

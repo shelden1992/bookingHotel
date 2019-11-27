@@ -16,7 +16,7 @@ public class FormDao extends AbstractDao<Form> {
     private static final String FORM_ID = "form_id";
     private static final String USER_ID = "user_id";
     private static final String RESERVATION_ID = "reservation_id";
-    private static final String ADDITIONAL_INFO = "additional_info";
+    private static final String TOTAL = "total";
     private static final String RESERVATION = "reservation";
     private static final String ROOM = "room";
     private static final String ROOM_NUMB = "room_numb";
@@ -33,11 +33,11 @@ public class FormDao extends AbstractDao<Form> {
     private static final String INSERT_INTO = "INSERT INTO " + FORM + "("
             + USER_ID + ", "
             + RESERVATION_ID + ", "
-            + ADDITIONAL_INFO + ") VALUES(?, ?, ?);";
+            + TOTAL + ") VALUES(?, ?, ?);";
     private static final String UPDATE_FORM_BY_ID = "UPDATE " + FORM + " SET "
             + USER_ID + "= ?, "
             + RESERVATION_ID + "= ?, "
-            + ADDITIONAL_INFO + "= ? "
+            + TOTAL + "= ? "
             + "WHERE " + FORM_ID + " = ?;";
 
     private static final String SELECT_FREE_ROOM_BETWEEN_DATE_AND_SOME_ROOM_TYPE_AND_PLACE = "SELECT reserv.reservation_id, r.room_numb, reserv.start_reservation, reserv.finish_reservation, is_reserved, place, price, type FROM " + FORM + " as f "
@@ -58,7 +58,7 @@ public class FormDao extends AbstractDao<Form> {
 
     private Form getForm(ResultSet resultSet) throws SQLException {
 
-        return new Form(resultSet.getInt(FORM_ID), getUserById(resultSet), getReservationById(resultSet), resultSet.getString(ADDITIONAL_INFO));
+        return new Form(resultSet.getInt(FORM_ID), getUserById(resultSet), getReservationById(resultSet), resultSet.getDouble(TOTAL));
     }
 
     private Form getFormDto(ResultSet resultSet) throws SQLException {
@@ -88,7 +88,7 @@ public class FormDao extends AbstractDao<Form> {
         return createUpdate(INSERT_INTO, ps -> {
             ps.setInt(1, entity.getUser().getEntityId());
             ps.setInt(2, getReservationId(entity));
-            ps.setString(3, entity.getAdditionalInfo());
+            ps.setDouble(3, entity.getTotal());
         });
     }
 
@@ -102,7 +102,7 @@ public class FormDao extends AbstractDao<Form> {
         return createUpdate(UPDATE_FORM_BY_ID, ps -> {
             ps.setInt(1, entity.getUser().getEntityId());
             ps.setInt(2, getReservation(entity).getEntityId());
-            ps.setString(3, entity.getAdditionalInfo());
+            ps.setDouble(3, entity.getTotal());
             ps.setInt(4, entity.getEntityId());
         });
     }

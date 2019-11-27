@@ -208,7 +208,7 @@
     </div>
     </div>
 </section>
-<%@include file="components/endPage.jsp" %>
+<%--<%@include file="components/endPage.jsp" %>--%>
 <%@include file="components/scripts.jsp" %>
 </body>
 </html>

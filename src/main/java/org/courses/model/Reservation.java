@@ -9,7 +9,8 @@ public class Reservation extends Entity {
     private Date finishReservation;
     private long dateDiff;
 
-    public Reservation(Date startReservation, Date finishReservation) {
+    public Reservation(int id, Date startReservation, Date finishReservation) {
+        this.id = id;
         this.startReservation = startReservation;
         this.finishReservation = finishReservation;
     }
