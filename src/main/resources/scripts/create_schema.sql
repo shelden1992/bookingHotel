@@ -81,18 +81,3 @@ create table form
 );
 
 
-
-# create table user_assessment_room
-# (
-#     user_id    int    not null,
-#     room_numb  int    not null,
-#     assessment double null,
-#     primary key (user_id, room_numb),
-#     constraint user_assessment_room_pk
-#         unique (room_numb),
-#     constraint user_assessment_room_room_room_numb_fk
-#         foreign key (room_numb) references room (room_numb),
-#     constraint user_assessment_room_user_user_id_fk
-#         foreign key (user_id) references user (user_id)
-# );
-
