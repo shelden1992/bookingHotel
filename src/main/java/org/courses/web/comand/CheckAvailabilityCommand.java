@@ -23,9 +23,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CheckAvailabiltyCommand implements Command {
+public class CheckAvailabilityCommand implements Command {
     public static final String ERROR = "navigation.bookingForm.unfortunatelyCaseCheckFreeRooms";
-    private static final Logger LOG = Logger.getLogger(CheckAvailabiltyCommand.class);
+    private static final Logger LOG = Logger.getLogger(CheckAvailabilityCommand.class);
     private static final String ADULTS = "adults";
     private static final String ROOM_TYPE = "roomType";
     private static final String CHECKIN_DATE = "checkin-date";

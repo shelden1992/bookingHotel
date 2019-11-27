@@ -32,7 +32,7 @@ public class CommandFactory {
         postCommandMap.put("/", new HomeCommand());
         postCommandMap.put("/logIn", new LogInCommand());
         postCommandMap.put("/register", new RegisterUserCommand());
-        postCommandMap.put("/check-availabilty", new CheckAvailabiltyCommand());
+        postCommandMap.put("/check-availability", new CheckAvailabilityCommand());
         postCommandMap.put("/booking-confirm", new BookingConfirmCommand());
     }
 

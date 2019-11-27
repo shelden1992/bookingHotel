@@ -70,7 +70,7 @@
         <div class="row check-availabilty" id="next">
             <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
-                <form action="${pageContext.request.contextPath}/check-availabilty" method="post">
+                <form action="${pageContext.request.contextPath}/check-availability" method="post">
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                             <label for="checkin_date" name="checkin_date"

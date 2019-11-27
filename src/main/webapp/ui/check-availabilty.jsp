@@ -36,7 +36,7 @@
 <%@include file="components/navigationBar.jsp" %>
 
 
-<section class="site-hero overlay" style="background-image: url( images/check-availabillty.jpg)"
+<section class="site-hero overlay" style="background-image: url( images/check-availability.jpg)"
          data-stellar-background-ratio="0.5" id="section-home">
 
     <div class="container">
